@@ -1,0 +1,10 @@
+body {
+	margin-top: 20px;
+}
+/*#form-login {
+	padding-top: 30px;
+}*/
+#chat-in{
+	height: 300px;
+	overflow: scroll;
+}
