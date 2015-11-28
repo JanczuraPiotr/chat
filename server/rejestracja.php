@@ -30,18 +30,30 @@ switch($action){
 			$pass2 = null;
 		}
 
-		$rejestrator = new server\logic\Rejestrator($nick, $pass1, $pass2);
-		$rejestrator->rejestruj();
+		try{
+			\server\logic\Rejestrator::rejestruj($nick, $pass1, $pass2);
+			echo json_encode([
+					'ret' => 'OK',
+					'msg' => 'zarejestrowano',
+					'data' => [
+						'nick' => htmlspecialchars($nick),
+					]
+			]);
+		} catch (\server\exceptions\ChatEx $ex) {
+			echo json_encode([
+					'ret' => $ex->chatExName(),
+					'msg' => $ex->chatExMsg(),
+					'data' => [
+							'supplement' => $ex->getMessage()
+					]
+			]);
+		}  catch (\Exception $e){
+			echo json_encode([
+					'ret' => 'EXCEPTION',
+					'msg' => $e->getMessage()
+			]);
+		}
 
-		echo json_encode([
-				'ret' => 'OK',
-				'msg' => 'zarejestrowano',
-				'data' => [
-					'nick' => $nick,
-					'pass1' => $pass1,
-					'pass2' => $pass2,
-				]
-		]);
 
 		break;
 	default:

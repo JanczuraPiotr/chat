@@ -8,13 +8,68 @@ var config = {
 			main : 'index.php'
 		},
 		server : {
-			rejestracja : 'server/rejestracja.php?action=rejestracja'
+			rejestracja : 'server/rejestracja.php?action=rejestracja',
+			login : 'server/authentication.php?action=login',
+			logout : 'server/authentication.php?action=logout',
+			chatAdd : 'server/chat.php?action=add'
 		}
 	},
 	dom : {
+		formChat : {
+			me : {
+				el : 'chat',
+				id : '#chat',
+				cl : ''
+			},
+			chatIn : {
+				me : {
+					el : 'chatIn',
+					id : '#chatIn',
+					cl : ''
+				}
+			},
+			chatOut : {
+				me : {
+					el : 'chatOut',
+					id : '#chatOut',
+					cl : ''
+				}
+
+			},
+			btnSend : {
+				me : {
+					el : 'btnSend',
+					id : '#btnSend',
+					cl : ''
+				}
+			},
+			btnExit : {
+				me : {
+					el : 'btnExit',
+					id : '#btnExit',
+					cl : ''
+				}
+			}
+		},
 		formLogin : {
 			me : {
-				el : 'formLogin'
+				el : 'formLogin',
+				id : '#formLogin',
+				cl : ''
+			},
+			inputNick : {
+				me : {
+					el : 'inputNick',
+					id : '#inputNick',
+					cl : ''
+				}
+			},
+			inputPassword : {
+				me : {
+					el : 'inputPassword',
+					id : '#inputPassword',
+					cl : ''
+				}
 			},
 			btnLogin : {
 				me : {
@@ -35,34 +90,42 @@ var config = {
 			me : {
 				el : 'formRejestracja',
 				id : '#formRejestracja',
-				cl : '.formRejestracja'
+				cl : ''
 			},
 			inputNick : {
 				me : {
 					el : 'inputNick',
 					id : '#inputNick',
-					cl : '.inputNick'
+					cl : ''
 				}
 			},
 			inputPassword1 : {
 				me : {
 					el : 'inputPassword1',
 					id : '#inputPassword1',
-					cl : '.inputPassword1'
+					cl : ''
 				}
 			},
 			inputPassword2 : {
 				me : {
 					el : 'inputPassword2',
 					id : '#inputPassword2',
-					cl : '.inputPassword2'
+					cl : ''
 				}
 			},
 			btnRejestracja : {
 				me : {
 					el : 'btnRejestracja',
 					id : '#btnRejestracja',
-					cl : '.btnRejestracja'
+					cl : ''
+				}
+			},
+			btnStronaGlowna : {
+				me : {
+					el : 'btnStronaGlowna',
+					id : '#btnStronaGlowna',
+					cl : ''
+
 				}
 			}
 		}

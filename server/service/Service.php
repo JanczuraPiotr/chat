@@ -6,6 +6,9 @@ use service\DB;
 
 class Service {
 
+	/**
+	 * @return DB
+	 */
 	public static function getDB(){
 		if( ! isset(static::$db) ){
 			static::$db = new DB(
@@ -19,6 +22,9 @@ class Service {
 		};
 		return static::$db;
 	}
+	/**
+	 * @return Chat
+	 */
 	public static function getChat(){
 		if( !isset(static::$chat) ){
 			static::$chat = new Chat();

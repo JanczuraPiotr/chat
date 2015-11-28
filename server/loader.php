@@ -9,7 +9,7 @@ function classLoader($classname){
 
 	if( $this_dir_first === $class_dir_last ){
 		// Jesteśmy w katalogu który jest składową przestrzeni nazw klasy.
-		// Tą składową należy usunąć - wynik rozplanowania katalogów.
+		// Tą składową należy usunąć - wynik złego rozplanowania katalogów.
 		array_shift( $arr_class_dir ) ;
 	}
 

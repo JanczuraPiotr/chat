@@ -1,38 +1,38 @@
 <?php
 namespace server\tabele;
 
-class Wiadomosc{
+class Message{
 	/**
 	 * identyfikator wiadomości
 	 * @var int
 	 */
 	private $id;
 	/**
-	 * Identyfikator urzytkownika który napisał wiadomość
+	 * Identyfikator użytkownika który napisał wiadomość
 	 * @var int
 	 */
 	private $user_id;
 	/**
-	 * Treść widomości.
+	 * Treść wiadomości.
 	 * @var string
 	 */
-	private $tresc;
+	private $post;
 	/**
 	 * Czas zapisania wiadomości w bazie danych
-	 * @var tiimestamp
+	 * @var timestamp
 	 */
 	private $timestamp;
 
 	/**
 	 * @param int $id identyfikator wiadomości
-	 * @param int $user_id Identyfikator urzytkownika który napisał wiadomość
-	 * @param string $tresc Treść widomości.
+	 * @param int $user_id Identyfikator użytkownika który napisał wiadomość
+	 * @param string $post Treść wiadomości.
 	 * @param timestamp $timestamp Czas zapisania wiadomości w bazie danych
 	 */
-	public function __construct($id, $user_id, $tresc, $timestamp) {
+	public function __construct($id, $user_id, $post, $timestamp) {
 		$this->id = $id;
 		$this->user_id = $user_id;
-		$this->tresc = $tresc;
+		$this->post = $post;
 		$this->timestamp = $timestamp;
 	}
 	/**
@@ -43,7 +43,7 @@ class Wiadomosc{
 		return $this->id;
 	}
 	/**
-	 * Idnetyfikator urzytkownika który napisał wiadomość
+	 * Identyfikator użytkownika który napisał wiadomość
 	 * @return int
 	 */
 	public function getUserId(){
@@ -53,8 +53,8 @@ class Wiadomosc{
 	 * Treść wiadomości
 	 * @return string
 	 */
-	public function getTresc(){
-		return $this->tresc;
+	public function getPost(){
+		return $this->post;
 	}
 	/**
 	 * Czas zapisania wiadomości w bazie danych

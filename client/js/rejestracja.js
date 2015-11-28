@@ -7,7 +7,8 @@ var Rejestracja = function(){
 	def.inputNickId = config.dom.formRejestracja.inputNick.me.id;
 	def.inputPassword1Id = config.dom.formRejestracja.inputPassword1.me.id;
 	def.inputPassword2Id = config.dom.formRejestracja.inputPassword2.me.id;
-	def.buttonRejestracjaId = config.dom.formRejestracja.btnRejestracja.me.id;
+	def.btnRejestracjaId = config.dom.formRejestracja.btnRejestracja.me.id;
+	def.btnStronaGlownaId = config.dom.formRejestracja.btnStronaGlowna.me.id;
 
 	def.ajax = function(nick, pass1, pass2){
 		console.log(config.url.server.rejestracja);
@@ -19,7 +20,22 @@ var Rejestracja = function(){
 				pass2 : pass2
 			},
 			success : function(response, status, xhr){
+				var resp = JSON.parse(response);
 				console.log(response);
+
+				if(resp.data.supplement){
+					alert(resp.msg + '\n objaśnienie : \n' + resp.data.supplement);
+				}else{
+					alert(resp.msg);
+				}
+
+				switch(response.ret){
+					case 'OK':
+						window.location.ref = config.url.form.main;
+						break;
+					default:
+
+				}
 			}
 		});
 	};
@@ -27,6 +43,11 @@ var Rejestracja = function(){
 	def.on = {};
 	def.pub = {};
 
+	def.on.clickBtnStronaGlowna = function(){
+		console.log('btnStronaGlowna');
+		window.location.href = config.url.form.main;
+
+	};
 	def.on.clickRejestracja = function(){
 		console.log('clickRejestracja');
 		var nick = $(def.inputNickId,def.myFormId).val();
@@ -34,7 +55,7 @@ var Rejestracja = function(){
 		var pass2 = $(def.inputPassword2Id,def.myFormId).val();
 
 //		if( nick.length === 0 ){
-//			alert('podaj nick');
+//			alert('podaj nick dłuższy niż 4 znaki');
 //			return;
 //		}
 //		if( pass1.length === 0 || pass2.length === 0 ){
@@ -50,7 +71,8 @@ var Rejestracja = function(){
 	};
 
 	def.init = function(){
-		$(def.buttonRejestracjaId).bind('click',def.on.clickRejestracja);
+		$(def.btnRejestracjaId).bind('click',def.on.clickRejestracja);
+		$(def.btnStronaGlownaId).bind('click',def.on.clickBtnStronaGlowna);
 	};
 
 	def.init();

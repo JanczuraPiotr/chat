@@ -1,5 +1,4 @@
 <?php
-
 class Config {
 	const DB_HOST    = 'localhost';
 	const DB_TYPE    = 'mysql';
