@@ -46,12 +46,18 @@ var Chat = function(){
 					case 'OK':
 						window.location.href = config.url.form.main;
 						break;
+					default:
+						if(resp.data.supplement){
+							alert(resp.msg + '\n objaśnienie : \n' + resp.data.supplement);
+						}else{
+							alert(resp.msg);
+						}
 				}
 			}
 		});
 	};
 	def.ajaxSend = function(post){
-
+		// @todo sporadycznie dodany post wyświetlany jest przez ajax dodający i ajas czytajacy nowe posty
 		$.ajax({
 			url : config.url.server.chatAdd,
 			data : {
@@ -68,13 +74,19 @@ var Chat = function(){
 							}
 							def.dom.addPost(resp.data[post].nick, resp.data[post].post, resp.data[post].timestamp);
 						}
-						break;
+						break
+					default:
+						if(resp.data.supplement){
+							alert(resp.msg + '\n objaśnienie : \n' + resp.data.supplement);
+						}else{
+							alert(resp.msg);
+						}
 				}
 			}
 		});
 	};
 	def.ajaxCommand = function(command){
-
+		// @todo o wykonanej komendzie należy poinformować wszystkich uruchomionych klientów
 		$.ajax({
 			url : config.url.server.chatCommand,
 			data : {
@@ -86,6 +98,12 @@ var Chat = function(){
 					case 'OK':
 						$(def.chatAllId).html('');
 						break;
+					default:
+						if(resp.data.supplement){
+							alert(resp.msg + '\n objaśnienie : \n' + resp.data.supplement);
+						}else{
+							alert(resp.msg);
+						}
 				}
 			}
 		});
@@ -104,7 +122,13 @@ var Chat = function(){
 							}
 							def.dom.addPost(resp.data[post].nick, resp.data[post].post, resp.data[post].timestamp);
 						}
-						break;
+						break
+					default:
+						if(resp.data.supplement){
+							alert(resp.msg + '\n objaśnienie : \n' + resp.data.supplement);
+						}else{
+							alert(resp.msg);
+						}
 				}
 			},
 			complete : function(){
@@ -165,6 +189,7 @@ var Chat = function(){
       $(def.btnSendId).click();
 		}
 	};
+
 
 	def.pub = {};
 

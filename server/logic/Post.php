@@ -12,7 +12,7 @@ class Post {
 			$user_id = $_SESSION['user_id'];
 			MessageCreate::create($user_id, $post, Service::getDB());
 		}else {
-			throw new Exception('brak identyfikatora zalogowanego użytkownika');
+			throw new \Exception('brak identyfikatora zalogowanego użytkownika');
 		}
 
 	}

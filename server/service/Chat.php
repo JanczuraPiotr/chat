@@ -36,7 +36,7 @@ class Chat {
 							'supplement' => $ex->getMessage()
 					]
 			]);
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$json = json_encode([
 					'ret' => 'EXCEPTION',
 					'msg' => $ex->getMessage(),
@@ -67,7 +67,7 @@ class Chat {
 							'supplement' => $ex->getMessage()
 					]
 			]);
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$json = json_encode([
 					'ret' => 'EXCEPTION',
 					'msg' => $ex->getMessage(),
@@ -98,7 +98,7 @@ class Chat {
 							'supplement' => $ex->getMessage()
 					]
 			]);
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$json = json_encode([
 					'ret' => 'EXCEPTION',
 					'msg' => $ex->getMessage(),
@@ -126,7 +126,7 @@ class Chat {
 							'supplement' => $ex->getMessage()
 					]
 			]);
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$json = json_encode([
 					'ret' => 'EXCEPTION',
 					'msg' => $ex->getMessage(),

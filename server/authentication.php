@@ -44,7 +44,7 @@ switch ($action){
 							'supplement' => $ex->getMessage()
 					]
 			]);
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 				echo json_encode([
 						'ret' => 'EXCEPTION',
 						'msg' => $ex->getMessage(),
