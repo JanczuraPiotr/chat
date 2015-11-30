@@ -7,7 +7,7 @@ class UserCreateExistEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExMsg() {
-		return 'użytkownik o podanym niku jest już zarejestrowany';
+		return 'użytkownik o podanym nicku jest już zarejestrowany';
 	}
 
 	public function chatExName() {

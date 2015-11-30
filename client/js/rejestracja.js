@@ -54,18 +54,11 @@ var Rejestracja = function(){
 		var pass1 = $(def.inputPassword1Id,def.myFormId).val();
 		var pass2 = $(def.inputPassword2Id,def.myFormId).val();
 
-//		if( nick.length === 0 ){
-//			alert('podaj nick dłuższy niż 4 znaki');
-//			return;
-//		}
-//		if( pass1.length === 0 || pass2.length === 0 ){
-//			alert('wpisz dwa razy to samo hasło');
-//			return ;
-//		};
-//		if( pass1 !== pass2 ){
-//			alert('wpisz dwa razy to samo hasło');
-//			return ;
-//		}
+		if( nick.length === 0 ){
+			alert('podaj nick dłuższy niż 4 znaki');
+			return;
+		}
+
 
 		def.ajax(nick, pass1, pass2);
 	};

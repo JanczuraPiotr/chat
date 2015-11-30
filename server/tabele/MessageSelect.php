@@ -12,7 +12,7 @@ class MessageSelect{
 	}
 
 	public static function selectFromTime($timestamp, DB $db){
-		$stmt = $db->prepare("SELECT id, user_id, post, timestamp FROM `".static::$tableName."` WHERE timestamp > :timestamp");
+		$stmt = $db->prepare("SELECT id, user_id, post, timestamp FROM `".static::$tableName."` WHERE timestamp >= :timestamp");
 		$stmt->bindValue(':timestamp', $timestamp, \PDO::PARAM_STR);
 		$stmt->execute();
 		return static::stmtToArr($stmt);

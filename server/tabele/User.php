@@ -3,15 +3,16 @@ namespace server\tabele;
 
 class User {
 	/**
+	 * autoincrement
 	 * @var int
 	 */
 	private $id;
 	/**
-	 * @var string
+	 * @var char[8]
 	 */
 	private $nick;
 	/**
-	 * @var password
+	 * @var char[60]
 	 */
 	private $password;
 
