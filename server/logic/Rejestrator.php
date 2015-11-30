@@ -20,7 +20,7 @@ class Rejestrator {
 			throw new \server\exceptions\UserCreateNickEx();
 		}
 		if( $pass1 === $pass2){
-			if( strlen($pass1) < 6 ){
+			if( strlen($pass1) < \Stale::PASS_MIN_LENGHT ){
 				throw new \server\exceptions\NewPasswordEx('za krótkie hasła');
 			}
 		}else{

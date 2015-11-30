@@ -19,40 +19,43 @@ if(isset($_REQUEST['action'])){
 }
 
 switch($action){
-	case 'add':
 
+	case 'add':
 		if(isset($_REQUEST['post'])){
 			$post = $_REQUEST['post'];
 		}else{
 			$post = null;
 		}
 
-		try{
-			// @prace sprawdzić XSS htmlspecialchars($string);
-			server\logic\Chat::addPost($post);
-			echo json_encode([
-					'ret' => 'OK',
-					'msg' => 'dodano wiadomość',
-					'data' => [
-							'post' => htmlspecialchars($post)
-					]
-			]);
-		} catch ( \server\exceptions\ChatEx $ex){
-			echo json_encode([
-					'ret' => $ex->chatExName(),
-					'msg' => $ex->chatExMsg(),
-					'data' => [
-							'supplement' => $ex->getMessage()
-					]
-			]);
-		} catch (Exception $ex) {
-			echo json_encode([
-					'ret' => 'EXCEPTION',
-					'msg' => $ex->getMessage(),
-					'data' => [	]
-			]);
-		}
+		$chat = \server\service\Service::getChat();
+		echo $chat->postAdd($post);
+
 		break;
-	case 'read':
+
+	case 'readAll':
+		
+		$chat = \server\service\Service::getChat();
+		echo $chat->postReadAll();
+
+		break;
+
+	case 'readLast':
+
+		if(isset($_REQUEST['timestamp'])){
+			$timestamp = $_REQUEST['timestamp'];
+		}else{
+			$timestamp = null;
+		}
+
+		$chat = \server\service\Service::getChat();
+		echo $chat->postReadLast($timestamp);
+
+		break;
+
+	case 'clear':
+
+		$chat = \server\service\Service::getChat();
+		echo $chat->clear();
+
 		break;
 }

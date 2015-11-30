@@ -33,7 +33,7 @@ switch ($action){
 					'ret' => 'OK',
 					'msg' => 'zalogowano',
 					'data' => [
-							'nick' => htmlspecialchars($nick)
+							'nick' => htmlspecialchars($user->getNick())
 					]
 			]);
 		} catch ( \server\exceptions\ChatEx $ex){

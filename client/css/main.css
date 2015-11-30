@@ -4,8 +4,7 @@ body {
 input {
 	width: 100%;
 }
-
-#chatIn{
+#chatAll{
 	height: 300px;
 	overflow: scroll;
 }

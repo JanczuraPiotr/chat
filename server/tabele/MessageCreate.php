@@ -1,5 +1,6 @@
 <?php
 namespace server\tabele;
+use server\service\DB;
 
 class MessageCreate {
 	public static $tableName = 'message';
@@ -16,8 +17,9 @@ class MessageCreate {
 			$stmt->bindValue(':post', $post, \PDO::PARAM_STR);
 			$stmt->execute();
 		} catch (\PDOException $ex){
-			// @prace
-		} catch (Exception $ex) {
+			throw new \server\exceptions\MessageCreateEx($ex->getMessage());
+		} catch (\Exception $ex) {
+			throw new \server\exceptions\MessageCreateEx();
 		}
 
 	}

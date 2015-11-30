@@ -7,7 +7,7 @@ class UserCreateEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExMsg() {
-		return 'nie utworzono uøytkownika';
+		return 'nie utworzono u≈ºytkownika';
 	}
 
 	public function chatExName() {

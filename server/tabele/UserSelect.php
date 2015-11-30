@@ -1,6 +1,6 @@
 <?php
 namespace server\tabele;
-use service\DB;
+use server\service\DB;
 
 class UserSelect {
 	/**
@@ -25,7 +25,6 @@ class UserSelect {
 		return new User($fetch['id'], $fetch['nick'], $fetch['password']);
 	}
 	/**
-	 *
 	 * @param int $nick
 	 * @param DB $db
 	 * @return \server\tabele\User
@@ -43,7 +42,6 @@ class UserSelect {
 	}
 
 	/**
-	 *
 	 * @param int $nick
 	 * @param string $password
 	 * @param DB $db

@@ -1,8 +1,8 @@
 <?php
 namespace server\service;
 
-use service\Chat;
-use service\DB;
+use server\service\Chat;
+use server\service\DB;
 
 class Service {
 

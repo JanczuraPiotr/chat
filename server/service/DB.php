@@ -1,5 +1,5 @@
 <?php
-namespace service;
+namespace server\service;
 
 class DB extends \PDO{
   private $dbtype;

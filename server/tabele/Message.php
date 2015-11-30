@@ -1,5 +1,6 @@
 <?php
 namespace server\tabele;
+use server\service\DB;
 
 class Message{
 	/**
@@ -12,6 +13,10 @@ class Message{
 	 * @var int
 	 */
 	private $user_id;
+	/**
+	 * @var User
+	 */
+	private $user;
 	/**
 	 * Treść wiadomości.
 	 * @var string
@@ -49,6 +54,17 @@ class Message{
 	public function getUserId(){
 		return $this->user_id;
 	}
+	/**
+	 * @param \server\tabele\DB $db
+	 * @return User
+	 */
+	public function getUser(DB $db){
+		if( ! isset($this->user)){
+			$this->user = UserSelect::selectId($this->user_id, $db);
+		}
+		return $this->user;
+	}
+
 	/**
 	 * Treść wiadomości
 	 * @return string
