@@ -1,0 +1,10 @@
+<?php
+class Config {
+	const DB_HOST    = 'localhost';
+	const DB_TYPE    = 'mysql';
+	const DB_CHARSET = 'utf8';
+	const DB_PORT    = 3306;
+	const DB_NAME    = 'dbname';
+	const DB_USER    = 'dbuser';
+	const DB_PASS    = 'dbpass';
+}

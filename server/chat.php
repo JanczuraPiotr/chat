@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'loader.php';
-include 'config.php';
+include 'Config.php';
 
 if( ! isset($_COOKIE['logged'])){
   echo json_encode([

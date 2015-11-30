@@ -1,7 +1,7 @@
 <?php
 function classLoader($classname){
 
-	$arr_this_dir = explode('\\', __DIR__);
+	$arr_this_dir = explode('/', __DIR__);
 	$arr_class_dir = explode('\\', $classname);
 
 	$this_dir_first = end($arr_this_dir);
@@ -13,7 +13,13 @@ function classLoader($classname){
 		array_shift( $arr_class_dir ) ;
 	}
 
-	$path = implode('\\', $arr_class_dir).'.php';
+	$path = implode('/', $arr_class_dir).'.php';
+
+//	echo '<pre>'.__FILE__.'::'.__LINE__.'</pre>';
+//	var_dump(__DIR__);
+//	var_dump($classname);
+//	var_dump($path);
+
 	require $path;
 }
 spl_autoload_register('classLoader');
