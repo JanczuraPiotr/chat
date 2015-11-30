@@ -26,18 +26,12 @@ class Service {
 	 * @return Chat
 	 */
 	public static function getChat(){
-		if( !isset(static::$chat) ){
-			static::$chat = new Chat();
-		}
-		return static::$chat;
+		return Chat::create();
 	}
 
 	/**
 	 * @var DB
 	 */
 	static private $db;
-	/**
-	 * @var Chat
-	 */
-	static private $chat;
+
 }

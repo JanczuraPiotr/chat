@@ -2,6 +2,16 @@
 namespace server\service;
 
 class Chat {
+	private static $instance;
+
+	public static function create(){
+		if( ! isset(static::$instance )){
+			static::$instance = new Chat();
+		}
+		return static::$instance;
+	}
+
+	private function __construct() {}
 
 	public static function postAdd($post, $timestamp){
 		$json = '';
@@ -125,4 +135,6 @@ class Chat {
 		}
 		return $json;
 	}
+
 }
+
