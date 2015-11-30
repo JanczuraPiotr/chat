@@ -1,10 +1,10 @@
 <?php
 class Config {
-	const DB_HOST    = 'localhost';
+	const DB_HOST    = 'sql.radmin.nazwa.pl';
 	const DB_TYPE    = 'mysql';
 	const DB_CHARSET = 'utf8';
 	const DB_PORT    = 3306;
-	const DB_NAME    = 'dealercrm';
-	const DB_USER    = 'dealercrm';
-	const DB_PASS    = 'dealercrm';
+	const DB_NAME    = 'radmin_16';
+	const DB_USER    = 'radmin_16';
+	const DB_PASS    = 'PJPL_radmin_16';
 }
