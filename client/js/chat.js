@@ -55,6 +55,7 @@ var Chat = function(){
 		$.ajax({
 			url : config.url.server.chatAdd,
 			data : {
+				timestamp : def.lastTimestamp, // zaraz po zapisie nowego posta pobiera posty powstałe po tym czasie
 				post : post
 			},
 			success : function(responseText, status, xhr){

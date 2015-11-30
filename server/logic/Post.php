@@ -10,9 +10,7 @@ class Post {
 		$user_id = null;
 		if(isset($_SESSION['user_id'])){
 			$user_id = $_SESSION['user_id'];
-			$timestamp = date("Y-m-d h:m:s");
 			MessageCreate::create($user_id, $post, Service::getDB());
-			return static::readFromTime($timestamp);
 		}else {
 			throw new Exception('brak identyfikatora zalogowanego użytkownika');
 		}

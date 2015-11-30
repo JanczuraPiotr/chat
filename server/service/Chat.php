@@ -3,19 +3,21 @@ namespace server\service;
 
 class Chat {
 
-	public static function postAdd($post){
+	public static function postAdd($post, $timestamp){
 		$json = '';
 		try{
-			$resp = \server\logic\Post::add($post);
+			\server\logic\Post::add($post);
+			$resp = \server\logic\Post::readFromTime($timestamp);
 			foreach ($resp as $key => $value) {
 				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
 				$resp[$key]['post'] = htmlspecialchars($value['post']);
 			}
 			$json = json_encode([
 					'ret' => 'OK',
-					'msg' => 'dodano wiadomość',
-					'data' =>  $resp
+					'msg' => 'postReadLast',
+					'data' => $resp
 			]);
+
 		} catch ( \server\exceptions\ChatEx $ex){
 			$json = json_encode([
 					'ret' => $ex->chatExName(),

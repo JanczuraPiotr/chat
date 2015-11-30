@@ -26,14 +26,19 @@ switch($action){
 		}else{
 			$post = null;
 		}
+		if(isset($_REQUEST['timestamp'])){
+			$timestamp = $_REQUEST['timestamp'];
+		}else{
+			$timestamp = null;
+		}
 
 		$chat = \server\service\Service::getChat();
-		echo $chat->postAdd($post);
+		echo $chat->postAdd($post, $timestamp);
 
 		break;
 
 	case 'readAll':
-		
+
 		$chat = \server\service\Service::getChat();
 		echo $chat->postReadAll();
 
