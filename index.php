@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-  <html>
+<html ng-app="app">
     <head>
 			<meta charset="UTF-8">
 			<title> chat </title>
+
+			<link href="client/css/main.css" rel="stylesheet">
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -10,13 +12,28 @@
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
 
 			<script src="https://code.angularjs.org/1.5.8/angular.min.js" type="text/javascript"></script>
-			
-			<link href="client/css/main.css" rel="stylesheet">
+
+			<!--<script src="client/app/config.js" type="text/javascript"></script>-->
+			<script src="client/app/app.js" type="text/javascript"></script>
+			<script src="client/app/controllers/main.controller.js"> </script>
+			<script src="client/app/controllers/login.controller.js"> </script>
+			<script src="client/app/services/session.service.js"> </script>
 
     </head>
   <body>
 
+		<div ng-controller="MainController as mainController">
+
+		</div>
+
+		<div ng-view="">
+
+		</div>
+
+
 		<div class="container">
+			<hr>
+			Usunąć : div.container
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
@@ -65,19 +82,23 @@
 
 				<div class="col-sm-2"></div>
 			</div>
-			</form>
+					</form>
+				</div>
+			</div>
 		</div>
-
 		<script src="client/js/config.js"></script>
-		<script>
 
+		<script>
 		 if( $.cookie('logged') ){
 				window.location.href = config.url.form.chat
 			}
 		</script>
 		<script src="client/js/index.js"></script>
+
 		<script>
 			new Index();
 		</script>
+
+
 	</body>
 </html>

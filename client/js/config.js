@@ -8,6 +8,7 @@ var config = {
 			main : 'index.php'
 		},
 		server : {
+			session : 'server/api/session.php',
 			rejestracja : 'server/rejestracja.php?action=rejestracja',
 			login : 'server/authentication.php?action=login',
 			logout : 'server/authentication.php?action=logout',
@@ -18,7 +19,7 @@ var config = {
 		}
 	},
 	thread : {
-		timeinterval : 5000
+		timeinterval : 5000,
 	},
 	dom : {
 		formChat : {
