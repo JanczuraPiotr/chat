@@ -20,7 +20,7 @@ if(isset($_REQUEST['action'])){
 
 switch($action){
 
-	case 'add':
+	case 'add':	
 		if(isset($_REQUEST['post'])){
 			$post = $_REQUEST['post'];
 		}else{
