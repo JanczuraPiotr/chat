@@ -12,24 +12,43 @@
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
 
 			<script src="https://code.angularjs.org/1.5.8/angular.min.js" type="text/javascript"></script>
+			<script src="https://code.angularjs.org/1.5.8/angular-route.min.js" type="text/javascript"></script>
 
 			<!--<script src="client/app/config.js" type="text/javascript"></script>-->
 			<script src="client/app/app.js" type="text/javascript"></script>
+			<script src="client/app/routing.js" type="text/javascript"></script>
 			<script src="client/app/controllers/main.controller.js"> </script>
 			<script src="client/app/controllers/login.controller.js"> </script>
+			<script src="client/app/controllers/register.controller.js"> </script>
 			<script src="client/app/services/session.service.js"> </script>
 
     </head>
   <body>
+  <!--<body ng-controller="MainController as mainController">-->
 
-		<div ng-controller="MainController as mainController">
+		<header class="row bg-info">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2">
+				header
+			</div>
+			<div class="col-sm-5"></div>
+		</header>
 
 		</div>
 
-		<div ng-view="">
+		<div ng-view>
 
 		</div>
 
+
+		<footer class="row bg-info">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2">
+				footer
+			</div>
+			<div class="col-sm-5"></div>
+
+		</footer>
 
 		<div class="container">
 			<hr>
@@ -80,18 +99,20 @@
 							</div> <!-- panel-footer -->
 
 
-				<div class="col-sm-2"></div>
-			</div>
+							<div class="col-sm-2"></div>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+
+
 		<script src="client/js/config.js"></script>
 
 		<script>
-		 if( $.cookie('logged') ){
-				window.location.href = config.url.form.chat
-			}
+//		 if( $.cookie('logged') ){
+//				window.location.href = config.url.form.chat
+//			}
 		</script>
 		<script src="client/js/index.js"></script>
 

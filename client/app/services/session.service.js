@@ -5,29 +5,24 @@ angular.module('app').factory('SessionService',[
 	'$q',
 	function($http,$q){console.log('SessionService');
 		var def = this;
-		def.ret;
-
-		def.response = null;
-		def.error = null;
+		
+		def.successFunction = function(response){console.log('SessionService.session.success'); console.log(response);};
+		def.errorFunction = function(error){console.log('SessionService.session.error');console.log(error);};
 
 		def.pub = {
-			session : function(){console.log('SessonService.session()');
+			session : function(successFunction, errorFunction){console.log('SessonService.session()');
 				var httpPromise;
+				if(typeof successFunction === 'function'){
+					def.successFunction = successFunction;
+				}
+				if(typeof errorFunction === 'function'){
+					def.errorFunction = errorFunction;
+				}
 
-				httpPromise = $http.get(config.url.server.session).then(
-								function(response){console.log('SessionService.session.success');
-									console.log(response);
-									def.response = response;
-									return def.response;
-								}
-								,function(error){console.log('SessionService.session.error');
-									console.log(error);
-									def.semafor = true;
-									def.error = error;
-								}
-							);
+				httpPromise = $http.get(config.url.server.session).then(def.successFunction,def.errorFunction);
 
 				return httpPromise;
+
 			}
 		};
 		return def.pub;

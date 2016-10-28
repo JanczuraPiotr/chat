@@ -2,12 +2,28 @@
 
 angular.module('app').controller('MainController',[
 	'$scope',
-	'$q',
+	'$location',
 	'SessionService',
-	function($scope, $q, SessionService){ console.log('MainController');
-		var response;
-		response = SessionService.session();
-		console.log(response);
-		// Przekieruj na logowanie lub rejestrację
+
+	function($scope, $location, SessionService){ console.log('MainController');
+		var def = this;
+		def.responsePromise;
+
+		def.successFunction = function(response){console.log('MainController.session.success');
+			console.log(response);
+		};
+		def.errorFunction = function(error){console.log('MainController.session.error');
+			console.log(error);
+		};
+
+		def.responsePromise = SessionService.session(def.successFunction, def.errorFunction);
+
+		$scope.loginBtnClick = function(){console.log('MainController.loginBtnClick()');
+			$location.path('/login');
+		};
+		$scope.registerBtnClick = function(){console.log('MainController.registerBtnClick()');
+			$location.path('/register');
+
+		};
 	}
 ]);
