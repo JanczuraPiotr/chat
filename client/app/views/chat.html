@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<div class="panel panel-primary" id="chat">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<div class="row">
+							<div class="col-sm-2 ">time</div>
+							<div class="col-sm-2 ">nick</div>
+							<div class="col-sm-8 ">post</div>
+						</div>
+					</h3>
+				</div>
+				<div class="panel-body" id="chatAll">
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<!--<div class="col-sm-1"></div>-->
+
+						<div class="col-sm-8">
+							<input type="text" name="chatEdit" id="chatEdit">
+						</div>
+						<div class="col-sm-2">
+							<button ng-click="sendBtnClick()" class="btn btn-default"> wyślij</button>
+						</div>
+
+						<div class="col-sm-2">
+							<button ng-click="exitBtnClick()" class="btn btn-default">wyloguj</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
+</div>

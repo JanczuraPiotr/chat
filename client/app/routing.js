@@ -12,6 +12,10 @@ angular.module('app')
 					.when('/register',{
 						templateUrl : 'client/app/views/register-form.html',
 						controller : 'RegisterController as registerController'
+					})
+					.when('/chat',{
+						templateUrl : 'client/app/views/chat.html',
+						controller : 'ChatController as chatController'
 					});
 
 					$routeProvider.otherwise({

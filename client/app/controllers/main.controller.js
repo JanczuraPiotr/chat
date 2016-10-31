@@ -23,7 +23,7 @@ angular.module('app').controller('MainController',[
 		};
 		$scope.registerBtnClick = function(){console.log('MainController.registerBtnClick()');
 			$location.path('/register');
-
 		};
+		
 	}
 ]);
