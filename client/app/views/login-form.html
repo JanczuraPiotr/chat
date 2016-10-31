@@ -1,57 +1,53 @@
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-					<form ng-submit="loginBtnClick()" class="form-horizontal">
-						<div class="panel panel-primary">
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			<form ng-submit="loginBtnClick()" class="form-horizontal">
 
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									logowanie
-								</h3>
+					<div class="panel panel-primary">
+
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								logowanie
+							</h3>
+						</div>
+
+						<div class="panel-body">
+
+							<div class="form-group">
+								<label for="inputNick" class="col-sm-4 control-label">nick</label>
+								<div class="col-sm-6">
+									<input ng-model="user.nick" type="text" class="form-control" id="inputNick" placeholder="nick">
+								</div>
 							</div>
 
-							<div class="panel-body">
-
-								<div class="form-group">
-									<label for="inputNick" class="col-sm-4 control-label">nick</label>
-									<div class="col-sm-6">
-										<input ng-model="user.nick" type="text" class="form-control" id="inputNick" placeholder="nick">
-									</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-4 control-label">password</label>
+								<div class="col-sm-6">
+									<input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="password">
 								</div>
+							</div>
 
-								<div class="form-group">
-									<label for="inputPassword" class="col-sm-4 control-label">password</label>
-									<div class="col-sm-6">
-										<input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="password">
-									</div>
+						</div><!-- panel-body -->
+
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-xs-4 col-sm-4">
+									<button class="btn btn-default btn-block" type="submit">logowanie</button>
 								</div>
-
-							</div><!-- panel-body -->
-
-							<div class="panel-footer">
-								<div class="row">
-									<!--<div class="col-sm-2"></div>-->
-									<div class="col-sm-2">
-										<button class="btn btn-default" type="submit">logowanie</button>
-									</div>
-									<div class="col-sm-2"></div>
-									<div class="col-sm-2">
-										<button  ng-click="toRegisterController()" class="btn btn-default">rejestracja</button>
-									</div>
-									<div class="col-sm-2"></div>
-									<div class="col-sm-2">
-										<button  ng-click="toMainController()" class="btn btn-default">rezygnacja</button>
-									</div>
-									<div class="col-sm-2"></div>
+								<!--<div class="col-md-3 col-lg-3"></div>-->
+								<div class="col-xs-4 col-sm-4">
+									<button  ng-click="toRegisterController()" class="btn btn-default btn-block">rejestracja</button>
 								</div>
+								<!--<div class="col-md-3 col-lg-3"></div>-->
+								<div class="col-xs-4 col-sm-4">
+									<button  ng-click="toMainController()" class="btn btn-default btn-block">rezygnacja</button>
+								</div>
+							</div>
 
-							</div> <!-- panel-footer -->
+						</div> <!-- panel-footer -->
 
 
-							<div class="col-sm-2"></div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+					</div>
+
+			</form>
+	</div>
+</div>

@@ -24,17 +24,14 @@
 			<script src="client/app/controllers/register.controller.js"> </script>
 			<script src="client/app/controllers/chat.controller.js"> </script>
 			<script src="client/app/services/session.service.js"> </script>
-
     </head>
   <body>
   <!--<body ng-controller="MainController as mainController">-->
 
 		<header class="row bg-info">
-			<div class="col-sm-5"></div>
-			<div class="col-sm-2">
+			<div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-offset-5">
 				header
 			</div>
-			<div class="col-sm-5"></div>
 		</header>
 
 		</div>
@@ -45,11 +42,9 @@
 
 
 		<footer class="row bg-info">
-			<div class="col-sm-5"></div>
-			<div class="col-sm-2">
+			<div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-offset-5">
 				footer
 			</div>
-			<div class="col-sm-5"></div>
 
 		</footer>
 

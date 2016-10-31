@@ -1,37 +1,40 @@
-<div class="container">
+
+<div >
 	<div class="row">
-		<div class="col-sm-2"></div>
-		<div class="col-sm-8">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+
 			<div class="panel panel-primary" id="chat">
+
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<div class="row">
-							<div class="col-sm-2 ">time</div>
-							<div class="col-sm-2 ">nick</div>
-							<div class="col-sm-8 ">post</div>
+							<div class="col-xs-1 col-sm-2 col-md-1">time</div>
+							<div class="col-xs-1 col-sm-2 col-md-1">nick</div>
+							<div class="col-xs-10 col-sm-8 col-md-10">post</div>
 						</div>
 					</h3>
 				</div>
+
 				<div class="panel-body" id="chatAll">
 				</div>
+
 				<div class="panel-footer">
 					<div class="row">
-						<!--<div class="col-sm-1"></div>-->
 
-						<div class="col-sm-8">
-							<input type="text" name="chatEdit" id="chatEdit">
-						</div>
-						<div class="col-sm-2">
-							<button ng-click="sendBtnClick()" class="btn btn-default"> wyślij</button>
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
+							<input type="text" name="chatEdit">
 						</div>
 
-						<div class="col-sm-2">
-							<button ng-click="exitBtnClick()" class="btn btn-default">wyloguj</button>
+						<div class=" col-xs-6 col-sm-2 col-md-2 col-lg-1">
+							<button ng-click="sendBtnClick()" class="btn btn-default btn-block"> wyślij</button>
+						</div>
+
+						<div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">
+							<button ng-click="exitBtnClick()" class="btn btn-default btn-block">wyloguj</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-2"></div>
 		</div>
 	</div>
 </div>
