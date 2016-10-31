@@ -2,7 +2,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
-					<form class="form-horizontal" id="formLogin">
+					<form ng-submit="loginBtnClick()" class="form-horizontal">
 						<div class="panel panel-primary">
 
 							<div class="panel-heading">
@@ -16,14 +16,14 @@
 								<div class="form-group">
 									<label for="inputNick" class="col-sm-4 control-label">nick</label>
 									<div class="col-sm-6">
-										<input type="nick" class="form-control" id="inputNick" placeholder="nick">
+										<input ng-model="user.nick" type="text" class="form-control" id="inputNick" placeholder="nick">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="inputPassword" class="col-sm-4 control-label">password</label>
 									<div class="col-sm-6">
-										<input type="password" class="form-control" id="inputPassword" placeholder="password">
+										<input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="password">
 									</div>
 								</div>
 
@@ -31,13 +31,17 @@
 
 							<div class="panel-footer">
 								<div class="row">
-									<div class="col-sm-2"></div>
-									<div class="col-sm-3">
-										<input type="button" name="button" class="btn btn-default" id="btnLogin" value="logowanie"/>
+									<!--<div class="col-sm-2"></div>-->
+									<div class="col-sm-2">
+										<button class="btn btn-default" type="submit">logowanie</button>
 									</div>
 									<div class="col-sm-2"></div>
-									<div class="col-sm-3">
-										<input type="button" name="rejestracja" class="btn btn-default" id="btnGotoRejestracja" value="rejestracja"/>
+									<div class="col-sm-2">
+										<button  ng-click="toRegisterController()" class="btn btn-default">rejestracja</button>
+									</div>
+									<div class="col-sm-2"></div>
+									<div class="col-sm-2">
+										<button  ng-click="toMainController()" class="btn btn-default">rezygnacja</button>
 									</div>
 									<div class="col-sm-2"></div>
 								</div>

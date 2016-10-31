@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('app').controller('ReqisterController',[
+angular.module('app').controller('RegisterController',[
 	'$scope',
-	function($scope, $log){ console.log('RegisterController');
+	'$location',
+	function($scope, $location){ console.log('RegisterController');
+
+		$scope.toMainController = function(){console.log('RegisterController.toMainController');
+					$location.path('/');
+		};
 	}
 ]);

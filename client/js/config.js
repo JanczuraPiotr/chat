@@ -1,6 +1,6 @@
 'use strict';
 
-var config = {
+var config  = {
 	url : {
 		form : {
 			chat : 'chat.php',
@@ -17,9 +17,6 @@ var config = {
 			chatReadAll : 'server/chat.php?action=readAll',
 			chatReadLast : 'server/chat.php?action=readLast'
 		}
-	},
-	thread : {
-		timeinterval : 5000,
 	},
 	dom : {
 		formChat : {

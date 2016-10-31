@@ -5,7 +5,7 @@ angular.module('app').factory('SessionService',[
 	'$q',
 	function($http,$q){console.log('SessionService');
 		var def = this;
-		
+
 		def.successFunction = function(response){console.log('SessionService.session.success'); console.log(response);};
 		def.errorFunction = function(error){console.log('SessionService.session.error');console.log(error);};
 
@@ -23,8 +23,13 @@ angular.module('app').factory('SessionService',[
 
 				return httpPromise;
 
+			},
+			login : function(user){console.log('SessionService.login(user)');
+				var httpPromise = $http.post(config.url.server.session).then(def.successFunction,def.errorFunction);
+				return httpPromise;
 			}
 		};
+
 		return def.pub;
 	}
 ]);
