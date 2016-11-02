@@ -4,8 +4,9 @@ angular.module('app').controller('ChatController',[
 	'$scope',
 	'$location',
 	'SessionService',
+	'AuthenticationService',
 
-	function($scope, $location, SessionService){ console.log('ChatController');
+	function($scope, $location, SessionService, AuthenticationService){ console.log('ChatController');
 		var def = this;
 		def.responsePromise;
 
@@ -21,11 +22,7 @@ angular.module('app').controller('ChatController',[
 		$scope.sendBtnClick = function(){console.log('ChatController.sendBtnClick()');
 		};
 		$scope.exitBtnClick = function(){console.log('ChatController.exitBtnClick()');
-			SessionService.delete(function(){
-					$location.path('/');
-				},function(){
-					$location.path('/');
-				});
+			AuthenticationService.logout();
 		};
 
 	}

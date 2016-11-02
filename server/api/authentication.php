@@ -3,17 +3,18 @@ session_start();
 include '../loader.php';
 include '../Config.php';
 
-switch($_SERVER['REQUEST_METHOD']){
+
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+
+switch($request->action){
 
 
-	case 'POST':
-		$postdata = file_get_contents("php://input");
-    $request = json_decode($postdata);
-		echo '<pre>'.__FILE__.' '.__LINE__ .'<br>'; print_r($request); echo '</pre>';
+	case 'login':
 
 		try {
 
-			$user = server\logic\Logowanie::login($request->nick, $request->password);
+			$user = server\logic\Logowanie::login($request->user->nick, $request->user->password);
 
 			echo json_encode([
 					'ret' => 'OK',

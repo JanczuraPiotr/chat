@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('app').controller('LoginController',[
-	'LoginService',
+	'AuthenticationService',
 	'$scope',
 	'$location',
-	function(LoginService, $scope, $location){ console.log('LoginController');
+	function(AuthenticationService, $scope, $location){ console.log('LoginController');
 		var def = this;
 
 		$scope.user = {
@@ -26,7 +26,7 @@ angular.module('app').controller('LoginController',[
 			$location.path('/');
 		};
 		$scope.loginBtnClick = function(){console.log('LoginController.loginBtnClick()');
-			var responsePromise = LoginService.login($scope.user,def.onLoginSuccess, def.onLoginError);
+			var responsePromise = AuthenticationService.login($scope.user,def.onLoginSuccess, def.onLoginError);
 			console.log(responsePromise);
 			console.log(responsePromise.value);
 		};

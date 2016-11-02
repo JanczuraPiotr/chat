@@ -14,6 +14,8 @@
 
 			<script src="https://code.angularjs.org/1.5.8/angular.min.js" type="text/javascript"></script>
 			<script src="https://code.angularjs.org/1.5.8/angular-route.min.js" type="text/javascript"></script>
+			<script src="https://code.angularjs.org/1.5.8/angular-cookies.js" type="text/javascript"></script>
+
 
 			<script src="client/js/config.js"></script>
 			<script src="client/app/config.js"></script>

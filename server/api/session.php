@@ -13,6 +13,7 @@ switch($_SERVER['REQUEST_METHOD']){
 		break;
 	case 'DELETE':
 		session_destroy();
+		echo json_encode([]);
 		break;
 	default:
 		echo 'error';

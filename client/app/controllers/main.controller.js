@@ -11,6 +11,9 @@ angular.module('app').controller('MainController',[
 
 		def.successFunction = function(response){console.log('MainController.session.success');
 			console.log(response);
+			if(response.data.lenght > 0){
+				$location.path('/chat');
+			}
 		};
 		def.errorFunction = function(error){console.log('MainController.session.error');
 			console.log(error);
@@ -24,6 +27,6 @@ angular.module('app').controller('MainController',[
 		$scope.registerBtnClick = function(){console.log('MainController.registerBtnClick()');
 			$location.path('/register');
 		};
-		
+
 	}
 ]);
