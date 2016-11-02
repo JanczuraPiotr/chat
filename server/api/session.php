@@ -11,9 +11,9 @@ switch($_SERVER['REQUEST_METHOD']){
 			echo json_encode([]);
 		}
 		break;
-//	case 'DELETE':
-//		session_destroy();
-//		break;
+	case 'DELETE':
+		session_destroy();
+		break;
 	default:
 		echo 'error';
 }

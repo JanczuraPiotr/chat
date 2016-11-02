@@ -16,14 +16,15 @@
 			<script src="https://code.angularjs.org/1.5.8/angular-route.min.js" type="text/javascript"></script>
 
 			<script src="client/js/config.js"></script>
-			<script src="client/app/config.js" type="text/javascript"></script>
-			<script src="client/app/app.js" type="text/javascript"></script>
-			<script src="client/app/routing.js" type="text/javascript"></script>
+			<script src="client/app/config.js"></script>
+			<script src="client/app/app.js"></script>
+			<script src="client/app/routing.js"></script>
 			<script src="client/app/controllers/main.controller.js"> </script>
 			<script src="client/app/controllers/login.controller.js"> </script>
 			<script src="client/app/controllers/register.controller.js"> </script>
 			<script src="client/app/controllers/chat.controller.js"> </script>
 			<script src="client/app/services/session.service.js"> </script>
+			<script src="client/app/services/authentication.service.js"> </script>
     </head>
   <body>
   <!--<body ng-controller="MainController as mainController">-->

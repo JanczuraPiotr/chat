@@ -5,6 +5,7 @@ var config = _.extend(config || {} , { // Dziedziczenie po poprzedniej wersji ch
 		api : {
 				session : 'server/api/session.php',
 				login : 'server/api/authentication.php',
+				registration : 'server/api/authenticatin.php'
 		}
 	},
 	route : {

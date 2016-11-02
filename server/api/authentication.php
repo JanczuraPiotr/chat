@@ -5,17 +5,11 @@ include '../Config.php';
 
 switch($_SERVER['REQUEST_METHOD']){
 
-	case 'GET':
-		if(count($_SESSION)){
-			echo json_encode($_SESSION);
-		}else{
-			echo json_encode([]);
-		}
-		break;
 
 	case 'POST':
 		$postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
+		echo '<pre>'.__FILE__.' '.__LINE__ .'<br>'; print_r($request); echo '</pre>';
 
 		try {
 
