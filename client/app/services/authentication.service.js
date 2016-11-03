@@ -7,14 +7,19 @@ angular.module('app').factory('AuthenticationService',[
 	function($http, $location, $cookies){console.log('AuthenticationService');
 		var def = this;
 
-		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success'); console.log(response);};
+		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
+			$location.path('/chat');
+		};
 		def.onLoginError = function(error){console.log('AuthenticationService.login.error');console.log(error);};
-		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success'); console.log(response);};
+		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');
+			console.log(response);
+			$location.path('login');
+		};
 		def.onRegistrationError = function(error){console.log('AuthenticationService.registration.error');console.log(error);};
 		def.onLogoutSuccess = function(response){console.log('AuthenticationService.logout.success'); console.log(response);
-			$cookies.remove('logged');
-			console.log($cookies.get('logged'));
+			$cookies.remove('logged',{path:'/'});
 			$location.path('/');
+
 		};
 		def.onLogoutError = function(error){console.log('AuthenticationService.logout.error');console.log(error);
 		};
@@ -35,7 +40,8 @@ angular.module('app').factory('AuthenticationService',[
 
 				return httpPromise;
 			},
-			logout : function(onLogoutSuccess, onLogoutError){console.log('LoginServer.logout()');
+			logout : function(onLogoutSuccess, onLogoutError){console.log('AuthenticationService.logout()');
+				$cookies.remove($cookies);
 
 				if(typeof onLogoutSuccess === 'function'){
 					def.onLogoutSuccess = onLogoutSuccess;
@@ -49,12 +55,15 @@ angular.module('app').factory('AuthenticationService',[
 			registration : function(registrationData, onRegistrationSuccess, onRegistrationError){
 				if(typeof onRegistrationSuccess === 'function'){
 					def.onRegistrationSuccess = onRegistrationSuccess;
-				}else{
-
 				}
 				if(typeof onRegistrationError === 'function'){
 					def.onRegistrationError = onRegistrationError;
 				}
+				$http.post(config.url.api.registration,{
+					action : 'rejestracja',
+					data : registrationData
+				}).then(def.onLogoutSuccess, def.onLogoutError);
+
 			}
 		};
 

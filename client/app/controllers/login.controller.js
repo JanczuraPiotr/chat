@@ -12,13 +12,6 @@ angular.module('app').controller('LoginController',[
 			password : null
 		};
 
-		def.onLoginSuccess = function(response){console.log('SessionService.login.success'); console.log(response);
-			$location.path('/chat');
-		};
-		def.onLoginError = function(error){console.log('SessionService.login.error');console.log(error);
-			alert('Błąd', 'Nie udana próba logowania');
-		};
-
 		$scope.toRegisterController = function(){console.log('LoginController.toRegisterController');
 			$location.path('/register');
 		};
@@ -26,9 +19,7 @@ angular.module('app').controller('LoginController',[
 			$location.path('/');
 		};
 		$scope.loginBtnClick = function(){console.log('LoginController.loginBtnClick()');
-			var responsePromise = AuthenticationService.login($scope.user,def.onLoginSuccess, def.onLoginError);
-			console.log(responsePromise);
-			console.log(responsePromise.value);
+			AuthenticationService.login($scope.user);
 		};
 	}
 ]);

@@ -2,8 +2,7 @@
 
 angular.module('app').factory('SessionService',[
 	'$http',
-	'$q',
-	function($http,$q){console.log('SessionService');
+	function($http){console.log('SessionService');
 		var def = this;
 
 		def.sessionSuccess = function(response){console.log('SessionService.session.success'); console.log(response);};
@@ -13,7 +12,6 @@ angular.module('app').factory('SessionService',[
 
 		def.pub = {
 			session : function(sessionSuccess, sessionError){console.log('SessionService.session()');
-				var httpPromise;
 				if(typeof sessionSuccess === 'function'){
 					def.sessionSuccess = sessionSuccess;
 				}
@@ -21,10 +19,7 @@ angular.module('app').factory('SessionService',[
 					def.sessionError = sessionError;
 				}
 
-				httpPromise = $http.get(config.url.api.session).then(def.sessionSuccess,def.sessionError);
-
-				return httpPromise;
-
+				$http.get(config.url.api.session).then(def.sessionSuccess,def.sessionError);
 			},
 			delete : function(deleteSuccess, deleteError){console.log('SessionService.delete()');
 				if(typeof deleteSuccess === 'function'){

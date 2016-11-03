@@ -10,7 +10,7 @@ angular.module('app').controller('ChatController',[
 		var def = this;
 		def.responsePromise;
 
-		def.successFunction = function(response){console.log('Chatontroller.session.success');
+		def.successFunction = function(response){console.log('ChatController.session.success');
 			console.log(response);
 		};
 		def.errorFunction = function(error){console.log('ChatController.session.error');

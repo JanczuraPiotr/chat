@@ -1,49 +1,90 @@
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-6">
-					<form class="form-horizontal" id="formRejestracja">
+<div>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			<form name="registerForm"
+						class="form-horizontal"
+						ng-submit="rejestruj()">
+
 						<div class="panel panel-primary">
+
 							<div class="panel-heading">
 								<h3 class="panel-title">
 										Rejestracja
 								</h3>
 							</div>
+
 							<div class="panel-body">
+
 								<div class="form-group">
-									<label for="inputNick" class="col-sm-4 control-label">nick</label>
+									<label for="nick" class="col-sm-4 control-label">nick</label>
 									<div class="col-sm-6">
-										<input type="nick" class="form-control" id="inputNick" placeholder="nick">
+										<input name="nick" type="text"
+													 class="form-control"
+													 ng-model="user.nick"
+													 ng-trim='true'
+													 required ='required'
+													 placeholder="nick"
+										/>
+										<div ng-show="error.nick.length">
+											Nick musi składać się z min 4 znaków
+										</div>
 									</div>
 								</div>
+
+
 								<div class="form-group">
-									<label for="inputPassword1" class="col-sm-4 control-label">password</label>
+									<label for="pass1" class="col-sm-4 control-label">password</label>
 									<div class="col-sm-6">
-										<input type="password" class="form-control" id="inputPassword1" placeholder="password">
+										<input name="pass1" type="password"
+													 class="form-control"
+													 ng-model="user.pass1"
+													 ng-trim="true"
+													 placeholder="password"
+													 required
+										/>
+										<div ng-show="error.pass1.length">
+											Hasło musi składać się z min 4 znaków
+										</div>
 									</div>
 								</div>
+
 								<div class="form-group">
-									<label for="inputPassword2" class="col-sm-4 control-label">password</label>
+									<label for="pass1" class="col-sm-4 control-label">password</label>
 									<div class="col-sm-6">
-										<input type="password" class="form-control" id="inputPassword2" placeholder="password">
+										<input name="pass1" type="password"
+													 class="form-control"
+													 ng-model="user.pass2"
+													 placeholder="password"
+													 required
+										/>
+										<div ng-show="error.pass2.length">
+											Hasło musi składać się z min 4 znaków
+										</div>
+										<div ng-show="error.pass.same">
+											Podane hasła różnią się.
+										</div>
 									</div>
 								</div>
+
+
 							</div>
+
 							<div class="panel-footer">
 								<div class="row">
-									<div class="col-sm-2"></div>
-									<div class="col-sm-3">
-										<button ng-click="toMainController()" class="btn btn-default" >rezygnacja</button>
+									<div class="col-sm-1 col-md-1"></div>
+									<div class="col-xs-6 col-sm-5 col-md-4">
+										<button ng-click="toMainController()" class="btn btn-default btn-block" type="button">rezygnacja</button>
 									</div>
-									<div class="col-sm-3"></div>
-									<div class="col-sm-3">
-										<input type="button" name="rejestracja" class="btn btn-default" id="btnRejestracja" value="rejestracja"/>
+									<div class="col-md-2"></div>
+									<div class="col-xs-6 col-sm-5 col-md-4">
+										<button class="btn btn-default btn-block" id="btnRejestracja" type='submit'>rejestracja</button>
 									</div>
-									<div class="col-sm-3"></div>
+									<div class="col-sm-1 col-md-1"></div>
 								</div>
 							</div>
 						</div>
+
 					</form>
-				<div class="col-sm-3"></div>
-										<!--<button ng-click="toMainController()" class="btn btn-default" >strona główna</button>-->
 		</div>
+	</div>
+</div>
