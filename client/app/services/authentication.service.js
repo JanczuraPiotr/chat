@@ -13,9 +13,11 @@ angular.module('app').factory('AuthenticationService',[
 		def.onLoginError = function(error){console.log('AuthenticationService.login.error');console.log(error);};
 		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');
 			console.log(response);
-			$location.path('login');
+			$location.path('/login');
 		};
-		def.onRegistrationError = function(error){console.log('AuthenticationService.registration.error');console.log(error);};
+		def.onRegistrationError = function(error){console.log('AuthenticationService.registration.error');
+			console.log(error);
+		};
 		def.onLogoutSuccess = function(response){console.log('AuthenticationService.logout.success'); console.log(response);
 			$cookies.remove('logged',{path:'/'});
 			$location.path('/');

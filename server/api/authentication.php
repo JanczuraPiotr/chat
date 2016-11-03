@@ -41,17 +41,17 @@ switch($request->action){
 	case 'rejestracja':
 
 		if( isset($request->data->nick) ){
-			$nick = $_REQUEST['nick'];
+			$nick = filter_var($request->data->nick, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
 		}else{
 			$nick = null;
 		}
-		if( isset($_REQUEST['pass1'])){
-			$pass1 = $_REQUEST['pass1'];
+		if( isset($request->data->pass1) ){
+			$pass1 = filter_var($request->data->pass1, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
 		}else{
 			$pass1 = null;
 		}
-		if( isset($_REQUEST['pass2'])){
-			$pass2 = $_REQUEST['pass2'];
+		if( isset($request->data->pass2) ){
+			$pass2 = filter_var($request->data->pass2, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
 		}else{
 			$pass2 = null;
 		}

@@ -14,3 +14,4 @@ var config = _.extend(config || {} , { // Dziedziczenie po poprzedniej wersji ch
 	minNickLength : 4,
 	minPassLength : 4
 });
+var CONFIG = config;

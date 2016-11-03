@@ -25,8 +25,8 @@
 													 required ='required'
 													 placeholder="nick"
 										/>
-										<div ng-show="error.nick.length">
-											Nick musi składać się z min 4 znaków
+										<div class="bg-warning" ng-show="error.nick.length">
+											Nick musi składać się z min {{ct.minNickLength}} znaków
 										</div>
 									</div>
 								</div>
@@ -43,7 +43,7 @@
 													 required
 										/>
 										<div ng-show="error.pass1.length">
-											Hasło musi składać się z min 4 znaków
+											Hasło musi składać się z min {{ct.minPassLength}} znaków
 										</div>
 									</div>
 								</div>
@@ -58,7 +58,7 @@
 													 required
 										/>
 										<div ng-show="error.pass2.length">
-											Hasło musi składać się z min 4 znaków
+											Hasło musi składać się z min {{ct.minPassLength }} znaków
 										</div>
 										<div ng-show="error.pass.same">
 											Podane hasła różnią się.
