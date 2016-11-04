@@ -10,10 +10,11 @@ angular.module('app').controller('MainController',[
 		def.responsePromise;
 
 		def.successFunction = function(response){
-			if(response.data.lenght > 0){
+			if(_.size(response.data) > 0){
 				$location.path('/chat');
 			}
 		};
+
 		def.errorFunction = function(error){
 			console.log(error);
 		};

@@ -19,7 +19,7 @@ angular.module('app').factory('SessionService',[
 					def.sessionError = sessionError;
 				}
 
-				$http.get(config.url.api.session).then(def.sessionSuccess,def.sessionError);
+				$http.get(CF.url.api.session).then(def.sessionSuccess,def.sessionError);
 			},
 			delete : function(deleteSuccess, deleteError){console.log('SessionService.delete()');
 				if(typeof deleteSuccess === 'function'){
@@ -28,7 +28,7 @@ angular.module('app').factory('SessionService',[
 				if(typeof deleteError === 'function'){
 					def.deleteError = deleteError;
 				}
-				$http.delete(config.url.api.session).then(def.deleteSuccess, def.deleteError);
+				$http.delete(CF.url.api.session).then(def.deleteSuccess, def.deleteError);
 			}
 		};
 

@@ -16,7 +16,7 @@ var Chat = function(){
 	def.dom.clTest = true;
 	def.dom.addPost = function(nick, post, timestamp){
 		$(def.chatAllId).append(def.dom.postTemplate(nick,post,timestamp));
-		$( def.chatAllId).scrollTop($(def.chatAllId)[0].scrollHeight);
+		$(def.chatAllId).scrollTop($(def.chatAllId)[0].scrollHeight);
 	};
 	def.dom.postTemplate = function(nick, post, timestamp){
 		var class1 = 'bg-success';

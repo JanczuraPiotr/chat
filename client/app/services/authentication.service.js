@@ -51,7 +51,7 @@ angular.module('app').factory('AuthenticationService',[
 				if(typeof loginError === 'function'){
 					def.onLoginError = loginError;
 				}
-				httpPromise = $http.post(config.url.api.login, {
+				httpPromise = $http.post(CF.url.api.login, {
 					action : 'login',
 					user : user
 				}).then(def.onLoginSuccess, def.onLoginError);
@@ -68,7 +68,7 @@ angular.module('app').factory('AuthenticationService',[
 					def.onLogoutError = onLogoutError;
 				}
 
-				$http.post(config.url.api.login, {action : 'logout'}).then(def.onLogoutSuccess, def.onLogoutError);
+				$http.post(CF.url.api.login, {action : 'logout'}).then(def.onLogoutSuccess, def.onLogoutError);
 			},
 			registration : function(registrationData, onRegistrationSuccess, onRegistrationError){
 				if(typeof onRegistrationSuccess === 'function'){
@@ -77,7 +77,7 @@ angular.module('app').factory('AuthenticationService',[
 				if(typeof onRegistrationError === 'function'){
 					def.onRegistrationError = onRegistrationError;
 				}
-				$http.post(config.url.api.registration,{
+				$http.post(CF.url.api.registration,{
 					action : 'rejestracja',
 					data : registrationData
 				}).then(def.onRegistrationSuccess, def.onRegistrationError);

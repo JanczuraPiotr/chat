@@ -8,6 +8,9 @@ var CF = {
 				registration	: 'server/api/authentication.php',
 		}
 	},
+	thread : {
+		TIME_INTERVAL : 1000
+	},
 	route : {
 		MAIN_CONTROLLER : '/' // @todo czemu nie działa używanie stałych w definicji routingu ?
 	},
