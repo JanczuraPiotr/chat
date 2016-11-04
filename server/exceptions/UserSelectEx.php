@@ -7,11 +7,11 @@ class UserSelectEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExMsg() {
-		return 'nie znaleziono uøytkownika';
+		return 'nie znaleziono u≈ºytkownika';
 	}
 
 	public function chatExName() {
-		return 'USER_SELECT_EX';
+		return 'EX_USER_SELECT';
 	}
 
 }

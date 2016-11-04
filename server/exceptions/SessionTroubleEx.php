@@ -11,7 +11,7 @@ class SessionTroubleEx extends ChatEx{
 	}
 
 	public function chatExName() {
-		return 'SESSION_TROUBLE_EX';
+		return 'EX_SESSION_TROUBLE';
 	}
 
 }

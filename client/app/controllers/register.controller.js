@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('app').controller('RegisterController',[
-	'AuthenticationService',
 	'$scope',
 	'$location',
-	function(AuthenticationService, $scope, $location){ console.log('RegisterController');
+	'AuthenticationService',
+	function($scope, $location, AuthenticationService){
 
 		$scope.ct = {
-			minNickLength : CONFIG.minNickLength,
-			minPassLength : CONFIG.minPassLength
+			minNickLength : CF.MIN_NICK_LENGTH,
+			minPassLength : CF.MIN_PASS_LENGTH
 		};
 
 		$scope.user = {
@@ -32,28 +32,20 @@ angular.module('app').controller('RegisterController',[
 			}
 		};
 
- 		$scope.toMainController = function(){console.log('RegisterController.toMainController');
-			//$location.path('/');
-			var modal = new ModalTemplate({
-                nm       : 'test',
-                style    : 'width: 300px',
-                title    : 'test',
-                body     : '<div> dialog modal body</div>',
-                onSubmit : function(){console.log('dialog.onSubmit()');},
-                onCancel : function(){console.log('dialog.onCancel()');}
-            });
+ 		$scope.toMainController = function(){
+			$location.path('/');
 		};
-		$scope.rejestruj = function(){console.log('RegisterController.rejestruj()');
+		$scope.rejestruj = function(){
 			var error = false;
-			if(($scope.user.nick) && ($scope.user.nick.length < CONFIG.minNickLength)){
+			if(($scope.user.nick) && ($scope.user.nick.length < CF.MIN_NICK_LENGTH)){
 				error = true;
 				$scope.error.nick.length = true;
 			}
-			if(($scope.user.pass1) && ($scope.user.pass1.length < CONFIG.minPassLength)){
+			if(($scope.user.pass1) && ($scope.user.pass1.length < CF.MIN_PASS_LENGTH)){
 				error = true;
 				$scope.error.pass1.length = true;
 			}
-			if(($scope.user.pass2) && ($scope.user.pass2.length < CONFIG.minPassLength)){
+			if(($scope.user.pass2) && ($scope.user.pass2.length < CF.MIN_PASS_LENGTH)){
 				error = true;
 				$scope.error.pass2.length = true;
 			}

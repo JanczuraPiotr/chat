@@ -11,7 +11,7 @@ class UserCreateEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'USER_CREATE_EX';
+		return 'EX_USER_CREATE';
 	}
 
 }

@@ -5,5 +5,6 @@ console.log(config);
 
 var app = angular.module('app',[
 	'ngRoute',
-	'ngCookies'
+	'ngCookies',
+	'ngMaterial'
 ]);

@@ -11,7 +11,7 @@ class LoginPasswordEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'LOGIN_PASSWORD_EX';
+		return 'EX_LOGIN_PASSWORD';
 	}
 
 }

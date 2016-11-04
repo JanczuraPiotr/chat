@@ -11,7 +11,7 @@ class UserCreateNickEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'USER_CREATE_NICK_EX';
+		return 'EX_USER_CREATE_NICK';
 	}
 
 }

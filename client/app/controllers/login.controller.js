@@ -1,24 +1,22 @@
 'use strict';
 
 angular.module('app').controller('LoginController',[
-	'AuthenticationService',
 	'$scope',
 	'$location',
-	function(AuthenticationService, $scope, $location){ console.log('LoginController');
-		var def = this;
-
+	'AuthenticationService',
+	function($scope, $location, AuthenticationService){
 		$scope.user = {
 			nick : null,
 			password : null
 		};
 
-		$scope.toRegisterController = function(){console.log('LoginController.toRegisterController');
+		$scope.toRegisterController = function(){
 			$location.path('/register');
 		};
-		$scope.toMainController = function(){console.log('LoginController.toMainController');
+		$scope.toMainController = function(){
 			$location.path('/');
 		};
-		$scope.loginBtnClick = function(){console.log('LoginController.loginBtnClick()');
+		$scope.loginBtnClick = function(){
 			AuthenticationService.login($scope.user);
 		};
 	}

@@ -4,7 +4,8 @@ angular.module('app').factory('AuthenticationService',[
 	'$http',
 	'$location',
 	'$cookies',
-	function($http, $location, $cookies){console.log('AuthenticationService');
+	'$mdDialog',
+	function($http, $location, $cookies, $mdDialog){console.log('AuthenticationService');
 		var def = this;
 
 		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
@@ -13,10 +14,25 @@ angular.module('app').factory('AuthenticationService',[
 		def.onLoginError = function(error){console.log('AuthenticationService.login.error');console.log(error);};
 		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');
 			console.log(response);
-			$location.path('/login');
+
+			switch(response.data.ret){
+				case CF.ex.mnm.NEW_PASSWORD:
+					$mdDialog.show(
+						$mdDialog.alert()
+							.clickOutsideToClose(true)
+							.title(CF.ex.msg.NEW_PASSWORD)
+							.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
+							.ok('Ok')
+					);
+					break;
+				default:
+					$location.path('/login');
+			}
+
 		};
 		def.onRegistrationError = function(error){console.log('AuthenticationService.registration.error');
 			console.log(error);
+
 		};
 		def.onLogoutSuccess = function(response){console.log('AuthenticationService.logout.success'); console.log(response);
 			$cookies.remove('logged',{path:'/'});
@@ -64,7 +80,7 @@ angular.module('app').factory('AuthenticationService',[
 				$http.post(config.url.api.registration,{
 					action : 'rejestracja',
 					data : registrationData
-				}).then(def.onLogoutSuccess, def.onLogoutError);
+				}).then(def.onRegistrationSuccess, def.onRegistrationError);
 
 			}
 		};
