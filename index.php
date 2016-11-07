@@ -27,6 +27,7 @@
 			<script src="client/app/config.js"></script>
 			<script src="client/app/app.js"></script>
 			<script src="client/app/routing.js"></script>
+			<script src="client/app/directives/scroll-posts.js"></script>
 			<script src="client/app/controllers/main.controller.js"> </script>
 			<script src="client/app/controllers/login.controller.js"> </script>
 			<script src="client/app/controllers/register.controller.js"> </script>

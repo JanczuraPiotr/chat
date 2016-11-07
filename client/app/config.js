@@ -6,6 +6,7 @@ var CF = {
 				session				: 'server/api/session.php',
 				login					: 'server/api/authentication.php',
 				registration	: 'server/api/authentication.php',
+				CHAT					: 'server/api/chat.php'
 		}
 	},
 	thread : {

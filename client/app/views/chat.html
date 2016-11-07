@@ -8,25 +8,30 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<div class="row">
-							<div class="col-xs-1 col-sm-2 col-md-1">time</div>
-							<div class="col-xs-1 col-sm-2 col-md-1">nick</div>
-							<div class="col-xs-10 col-sm-8 col-md-10">post</div>
+							<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">time</div>
+							<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">nick</div>
+							<div class="col-xs-4 col-sm-6 col-md-8 col-lg-8 ">post</div>
 						</div>
 					</h3>
 				</div>
 
-				<div class="panel-body" id="chatAll">
+				<div class="panel-body" id="chatAll" scroll-posts>
+					<div class="row row-post" ng-repeat="post in posts.store" ng-class-even="'even'" ng-class-odd="'odd'">
+							<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">{{post.timestamp}}</div>
+							<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">{{post.nick}}</div>
+							<div class="col-xs-4 col-sm-6 col-md-8 col-lg-8">{{post.post}}</div>
+					</div>
 				</div>
 
 				<div class="panel-footer">
 					<div class="row">
 
 						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10">
-							<input type="text" name="chatEdit">
+							<input type="text" ng-model="newPost">
 						</div>
 
 						<div class=" col-xs-6 col-sm-2 col-md-2 col-lg-1">
-							<button ng-click="sendBtnClick()" class="btn btn-default btn-block"> wyślij</button>
+							<button ng-click="btnSendClick()" ng-disabled="!newPost" class="btn btn-default btn-block"> wyślij</button>
 						</div>
 
 						<div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">

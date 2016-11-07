@@ -6,6 +6,19 @@ input {
 	width: 100%;
 }
 #chatAll{
-	height: 300px;
+	height: 500px;
 	overflow: scroll;
+	overflow-x: hidden;
+}
+.row-post {
+	margin: 3px;
+}
+.title-post div{
+	text-align: left !important;
+}
+.even {
+	background-color: bisque
+}
+.odd {
+	background-color: papayawhip
 }
