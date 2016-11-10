@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class MessageCreateEx extends server\exceptions\ChatEx{
+class MessageCreate extends server\exceptions\ChatEx{
 	public function chatExCode() {
 		return static::MESSAGE_CREATE;
 	}

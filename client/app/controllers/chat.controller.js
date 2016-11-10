@@ -1,5 +1,5 @@
 'use strict';
-
+// @todo Przewijanie okna wiadomości do ostatniego wiersza
 angular.module('app').controller('ChatController',[
 	'$scope',
 	'$http',

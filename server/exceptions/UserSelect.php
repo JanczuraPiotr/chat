@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class UserSelectEx extends \server\exceptions\ChatEx{
+class UserSelect extends \server\exceptions\ChatEx{
 	public function chatExCode() {
 		return static::USER_SELECT;
 	}

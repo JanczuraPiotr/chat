@@ -3,61 +3,70 @@ session_start();
 include '../loader.php';
 include '../Config.php';
 
-if( ! isset($_COOKIE['logged'])){
-  echo json_encode([
-			'ret' => 'NOT_LOGGED',
-			'msg' => 'nie jesteś zalogowany',
-			'data' => []
-	]);
-  exit ;
-}
 
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
+try{
 
-switch($request->action){
+	if( ! isset($_COOKIE['logged'])){
+		throw new server\exceptions\NotLogged();
+	}
 
-	case 'add':
-		if(isset($request->post)){
-			$post = filter_var($request->post, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
-		}else{
-			$post = null;
-		}
-		if(isset($request->timestamp)){
-			$timestamp = filter_var($request->timestamp, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
-		}else{
-			$timestamp = null;
-		}
+	$postdata = file_get_contents("php://input");
+	$request = json_decode($postdata);
 
-		$chat = \server\service\Service::getChat();
-		echo $chat->postAdd($post, $timestamp);
+	switch($request->action){
 
-		break;
+		case 'add':
+			if(isset($request->post)){
+				$post = filter_var($request->post, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+			}else{
+				$post = null;
+			}
+			if(isset($request->timestamp)){
+				$timestamp = filter_var($request->timestamp, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+			}else{
+				$timestamp = null;
+			}
 
-	case 'readAll':
+			$chat = \server\service\Service::getChat();
+			echo $chat->postAdd($post, $timestamp);
 
-		$chat = \server\service\Service::getChat();
-		echo $chat->postReadAll();
+			break;
 
-		break;
+		case 'readAll':
 
-	case 'readLast':
+			$chat = \server\service\Service::getChat();
+			echo $chat->postReadAll();
 
-		if(isset($request->timestamp)){
-			$timestamp = filter_var($request->timestamp, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
-		}else{
-			$timestamp = null;
-		}
+			break;
 
-		$chat = \server\service\Service::getChat();
-		echo $chat->postReadLast($timestamp);
+		case 'readLast':
 
-		break;
+			if(isset($request->timestamp)){
+				$timestamp = filter_var($request->timestamp, FILTER_SANITIZE_STRING, FILTER_NULL_ON_FAILURE);
+			}else{
+				$timestamp = null;
+			}
 
-	case 'clear':
+			$chat = \server\service\Service::getChat();
+			echo $chat->postReadLast($timestamp);
 
-		$chat = \server\service\Service::getChat();
-		echo $chat->clear();
+			break;
 
-		break;
+		case 'clear':
+
+			$chat = \server\service\Service::getChat();
+			echo $chat->clear();
+
+			break;
+	}
+} catch (\server\exceptions\NotLogged $ex){
+		echo json_encode([
+				'ret' => $ex->chatExName(),
+				'msg' => $ex->chatExMsg(),
+				'data' => []
+		]);
+		exit ;
+
+} catch (Exception $ex) {
+
 }

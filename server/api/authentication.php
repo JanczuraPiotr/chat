@@ -3,6 +3,7 @@ session_start();
 include '../loader.php';
 include '../Config.php';
 
+// @todo dopracować logowanie obsługę sesji i cookies
 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
