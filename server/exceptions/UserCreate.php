@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class UserCreateEx extends \server\exceptions\ChatEx{
+class UserCreate extends \server\exceptions\ChatEx{
 	public function chatExCode() {
 		return static::USER_CREATE;
 	}
@@ -11,7 +11,7 @@ class UserCreateEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'USER_CREATE_EX';
+		return 'EX_USER_CREATE';
 	}
 
 }

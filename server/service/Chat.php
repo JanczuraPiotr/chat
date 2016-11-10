@@ -18,10 +18,10 @@ class Chat {
 		try{
 			\server\logic\Post::add($post);
 			$resp = \server\logic\Post::readFromTime($timestamp);
-			foreach ($resp as $key => $value) {
-				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
-				$resp[$key]['post'] = htmlspecialchars($value['post']);
-			}
+//			foreach ($resp as $key => $value) {
+//				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
+//				$resp[$key]['post'] = htmlspecialchars($value['post']);
+//			}
 			$json = json_encode([
 					'ret' => 'OK',
 					'msg' => 'postReadLast',

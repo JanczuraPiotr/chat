@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class LoginPasswordEx extends \server\exceptions\ChatEx{
+class LoginPassword extends \server\exceptions\ChatEx{
 	public function chatExCode() {
 		return static::LOGIN_PASSWORD;
 	}
@@ -11,7 +11,7 @@ class LoginPasswordEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'LOGIN_PASSWORD_EX';
+		return 'EX_LOGIN_PASSWORD';
 	}
 
 }

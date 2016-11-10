@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class SessionTroubleEx extends ChatEx{
+class SessionTrouble extends ChatEx{
 	public function chatExCode() {
 		return static::SESSION_TROUBLE;
 	}
@@ -11,7 +11,7 @@ class SessionTroubleEx extends ChatEx{
 	}
 
 	public function chatExName() {
-		return 'SESSION_TROUBLE_EX';
+		return 'EX_SESSION_TROUBLE';
 	}
 
 }

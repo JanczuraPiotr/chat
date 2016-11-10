@@ -28,19 +28,19 @@ class UserCreate {
 			$err = $stmt->errorInfo();
 			switch($err[1]){
 				case 1062:
-					throw new \server\exceptions\UserCreateExistEx();
+					throw new \server\exceptions\UserCreateExist();
 			}
-			throw new \server\exceptions\UserCreateEx();
+			throw new \server\exceptions\UserCreate();
 		} catch (\Exception $e){
-			throw new \server\exceptions\UserCreateEx();
+			throw new \server\exceptions\UserCreate();
 		}
 
 		try{
 			return UserSelect::selectId($db->lastInsertId(), $db);
 		} catch (\PDOException $e){
-			throw new \server\exceptions\UserSelectEx();
+			throw new \server\exceptions\UserSelect();
 		} catch (Exception $e) {
-			throw new \server\exceptions\UserSelectEx();
+			throw new \server\exceptions\UserSelect();
 		}
 	}
 }

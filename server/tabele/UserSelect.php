@@ -19,7 +19,7 @@ class UserSelect {
 		$stmt->bindValue(':id', $id, \PDO::PARAM_INT);
 		$stmt->execute();
 		if( $stmt->rowCount() !== 1 ){
-			throw new \server\exceptions\UserSelectEx('szukano względem id');
+			throw new \server\exceptions\UserSelect('szukano względem id');
 		}
 		$fetch = $stmt->fetch(\PDO::FETCH_ASSOC);
 		return new User($fetch['id'], $fetch['nick'], $fetch['password']);
@@ -28,14 +28,14 @@ class UserSelect {
 	 * @param int $nick
 	 * @param DB $db
 	 * @return \server\tabele\User
-	 * @throws \server\exceptions\UserSelectEx
+	 * @throws \server\exceptions\UserSelect
 	 */
 	public static function selectNick($nick, DB $db){
 		$stmt = $db->prepare("SELECT * FROM `".static::$tableName."` WHERE `nick` = :nick");
 		$stmt->bindValue(':nick', $nick, \PDO::PARAM_STR);
 		$stmt->execute();
 		if( $stmt->rowCount() == 0 ){
-			throw new \server\exceptions\UserSelectEx('Szukano względem nick');
+			throw new \server\exceptions\UserSelect('Szukano względem nick');
 		}
 		$fetch = $stmt->fetch(\PDO::FETCH_ASSOC);
 		return new User($fetch['id'], $fetch['nick'], $fetch['password']);
@@ -46,7 +46,7 @@ class UserSelect {
 	 * @param string $password
 	 * @param DB $db
 	 * @return \server\tabele\User
-	 * @throws \server\exceptions\UserSelectEx
+	 * @throws \server\exceptions\UserSelect
 	 */
 	public static function select($nick, $password, DB $db){
 
@@ -55,7 +55,7 @@ class UserSelect {
 		$stmt->bindValue(':password', sha1($password));
 		$stmt->execute();
 		if( $stmt->rowCount() == 0 ){
-			throw new \server\exceptions\UserSelectEx('Nie ma użytkownika o podanej kombinacji nick:password');
+			throw new \server\exceptions\UserSelect('Nie ma użytkownika o podanej kombinacji nick:password');
 		}
 		$fetch = $stmt->fetch(\PDO::FETCH_ASSOC);
 		return new User($fetch['id'], $fetch['nick'], $fetch['password']);

@@ -1,7 +1,7 @@
 <?php
 namespace server\exceptions;
 
-class UserCreateNickEx extends \server\exceptions\ChatEx{
+class UserCreateNick extends \server\exceptions\ChatEx{
 	public function chatExCode() {
 		return static::USER_CREATE_NICK;
 	}
@@ -11,7 +11,7 @@ class UserCreateNickEx extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'USER_CREATE_NICK_EX';
+		return 'EX_USER_CREATE_NICK';
 	}
 
 }

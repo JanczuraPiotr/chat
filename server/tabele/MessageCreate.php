@@ -17,9 +17,9 @@ class MessageCreate {
 			$stmt->bindValue(':post', $post, \PDO::PARAM_STR);
 			$stmt->execute();
 		} catch (\PDOException $ex){
-			throw new \server\exceptions\MessageCreateEx($ex->getMessage());
+			throw new \server\exceptions\MessageCreate($ex->getMessage());
 		} catch (\Exception $ex) {
-			throw new \server\exceptions\MessageCreateEx();
+			throw new \server\exceptions\MessageCreate();
 		}
 
 	}
