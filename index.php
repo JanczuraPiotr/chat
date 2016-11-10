@@ -23,7 +23,6 @@
 
 			<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 
-			<script src="client/js/config.js"></script>
 			<script src="client/app/config.js"></script>
 			<script src="client/app/app.js"></script>
 			<script src="client/app/routing.js"></script>

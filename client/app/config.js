@@ -24,6 +24,9 @@ CF.ex = {		// Wyjątki zgłaszane przez server
 	mnm : {},	// Krótka nazwa wyjątku
 	msg : {}	// Wiadomość opisowa wyjątku
 };
+CF.ex.cod.OK = 1;
+CF.ex.mnm.OK = 'OK';
+CF.ex.msg.OK = '';
 CF.ex.cod.CHAT = -1;
 CF.ex.mnm.CHAT = 'EX_CHAT';
 CF.ex.msg.CHAT = 'Ogólny wyjątek chat-u.';
@@ -37,7 +40,7 @@ CF.ex.cod.USER_CREATE = -4;
 CF.ex.mnm.USER_CREATE = 'EX_USER_CREATE';
 CF.ex.msg.USER_CREATE = 'Nie utworzono użytkownika.';
 CF.ex.cod.USER_SELECT = -5;
-CF.ex.mnm.USER_SELECT = 'EXT_USER_SELECT';
+CF.ex.mnm.USER_SELECT = 'EX_USER_SELECT';
 CF.ex.msg.USER_SELECT = 'Nie znaleziono użytkownika';
 CF.ex.cod.USER_CREATE_EXISTS = -6;
 CF.ex.mnm.USER_CREATE_EXISTS = 'EX_USER_CREATE_EXISTS';

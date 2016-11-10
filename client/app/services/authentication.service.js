@@ -9,7 +9,20 @@ angular.module('app').factory('AuthenticationService',[
 		var def = this;
 
 		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
-			$location.path('/chat');
+			switch(response.data.ret){
+				case CF.ex.mnm.OK:
+					$location.path('/chat');
+					break;
+				case CF.ex.mnm.USER_SELECT:
+							$mdDialog.show(
+								$mdDialog.alert()
+									.clickOutsideToClose(true)
+									.title(CF.ex.msg.USER_SELECT)
+									.textContent('Niepoprawne dane do logowania')
+									.ok('Ok')
+							);
+					break;
+			}
 		};
 		def.onLoginError = function(error){console.log('AuthenticationService.login.error');console.log(error);};
 		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');

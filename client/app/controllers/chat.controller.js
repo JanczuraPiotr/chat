@@ -1,13 +1,14 @@
 'use strict';
-// @todo Przewijanie okna wiadomości do ostatniego wiersza
+// @todo Przewijanie okna wiadomości do ostatniego wiersza - podczas ładowania i zmiany rozmiaru
 angular.module('app').controller('ChatController',[
 	'$scope',
 	'$http',
-	'$timeout',
+	'$location',
 	'$interval',
+	'$mdDialog',
 	'AuthenticationService',
 
-	function($scope, $http, $timeout, $interval, AuthenticationService){ console.log('ChatController');
+	function($scope, $http, $location, $interval, $mdDialog, AuthenticationService){ console.log('ChatController');
 		var def = this;
 		def.run = null;
 		def.lastTimestamp = '';
@@ -18,10 +19,15 @@ angular.module('app').controller('ChatController',[
 			var model = this;
 			model.store[post.id] = post;
 		};
+
 		$scope.posts.clear = function(){
 			var model = this;
 			model.store = {};
 		};
+
+		$scope.$on('$destroy',function(){console.log('ChatController.destructor()');
+			$interval.cancel(def.run);
+		});
 
 
 		def.apiReadAll = function(){
@@ -30,11 +36,25 @@ angular.module('app').controller('ChatController',[
 			}).then(function(response){
 				var post;
 				var posts = response.data.data;
-				for ( post in posts){
-					$scope.posts.add(posts[post]);
-					if( def.lastTimestamp < posts[post].timestamp ){
-						def.lastTimestamp = posts[post].timestamp;
-					}
+				switch(response.data.ret){
+					case CF.ex.mnm.OK:
+						for ( post in posts){
+							$scope.posts.add(posts[post]);
+							if( def.lastTimestamp < posts[post].timestamp ){
+								def.lastTimestamp = posts[post].timestamp;
+							}
+						}
+						break;
+					case CF.ex.mnm.NOT_LOGGED:
+							$mdDialog.show(
+								$mdDialog.alert()
+									.clickOutsideToClose(true)
+									.title(CF.ex.msg.NOT_LOGGED)
+									.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
+									.ok('Ok')
+							);
+							$location.path('/login');
+						break;
 				}
 			},function(error){console.log('ChatController.apiReadAll().error');
 
