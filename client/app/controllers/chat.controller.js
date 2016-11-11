@@ -6,9 +6,10 @@ angular.module('app').controller('ChatController',[
 	'$location',
 	'$interval',
 	'$mdDialog',
+	'AjaxService',
 	'AuthenticationService',
 
-	function($scope, $http, $location, $interval, $mdDialog, AuthenticationService){ console.log('ChatController');
+	function($scope, $http, $location, $interval, $mdDialog, AjaxService, AuthenticationService){ console.log('ChatController');
 		var def = this;
 		def.run = null;
 		def.lastTimestamp = '';
@@ -29,6 +30,9 @@ angular.module('app').controller('ChatController',[
 			$interval.cancel(def.run);
 		});
 
+		AjaxService.run(CF.url.api.CHAT,{
+				action: 'readAll'
+			},{},function(){console.log('AjaxService.finally');});
 
 		def.apiReadAll = function(){
 			$http.post(CF.url.api.CHAT,{
@@ -57,8 +61,6 @@ angular.module('app').controller('ChatController',[
 						break;
 				}
 			},function(error){console.log('ChatController.apiReadAll().error');
-
-			}).finally(function(){console.log('finally');
 
 			});
 		};

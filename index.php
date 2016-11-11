@@ -31,8 +31,9 @@
 			<script src="client/app/controllers/login.controller.js"> </script>
 			<script src="client/app/controllers/register.controller.js"> </script>
 			<script src="client/app/controllers/chat.controller.js"> </script>
-			<script src="client/app/services/session.service.js"> </script>
 			<script src="client/app/services/authentication.service.js"> </script>
+			<script src="client/app/services/ajax.service.js"> </script>
+			<script src="client/app/services/session.service.js"> </script>
     </head>
   <body>
 

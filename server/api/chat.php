@@ -33,7 +33,7 @@ try{
 			break;
 
 		case 'readAll':
-
+			
 			$chat = \server\service\Service::getChat();
 			echo $chat->postReadAll();
 

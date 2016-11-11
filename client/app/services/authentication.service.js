@@ -10,10 +10,10 @@ angular.module('app').factory('AuthenticationService',[
 
 		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
 			switch(response.data.ret){
-				case CF.ex.mnm.OK:
+				case CF.ex.mnm[CF.ex.cod.OK]:
 					$location.path('/chat');
 					break;
-				case CF.ex.mnm.USER_SELECT:
+				case CF.ex.mnm[CF.ex.cod.USER_SELECT]:
 							$mdDialog.show(
 								$mdDialog.alert()
 									.clickOutsideToClose(true)
@@ -29,11 +29,11 @@ angular.module('app').factory('AuthenticationService',[
 			console.log(response);
 
 			switch(response.data.ret){
-				case CF.ex.mnm.NEW_PASSWORD:
+				case CF.ex.mnm[CF.ex.cod.NEW_PASSWORD]:
 					$mdDialog.show(
 						$mdDialog.alert()
 							.clickOutsideToClose(true)
-							.title(CF.ex.msg.NEW_PASSWORD)
+							.title(CF.ex.msg[CF.ex.cod.NEW_PASSWORD])
 							.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
 							.ok('Ok')
 					);
