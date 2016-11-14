@@ -71,7 +71,7 @@ angular.module('app').controller('ChatController',[
 			},{
 				ok : function(response){
 					var post;
-					var posts = response.data.data;
+					var posts = response.data;
 					for ( post in posts){
 						if( def.lastTimestamp < posts[post].timestamp ){
 							def.lastTimestamp = posts[post].timestamp;
