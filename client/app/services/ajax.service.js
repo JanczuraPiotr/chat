@@ -34,10 +34,12 @@ angular.module('app').factory('AjaxService',[
 
 		/**
 		 * Komunikacja zakończone kodem 200.
-		 * Gdy przetwarzanie danych zakończone sukcesem w def.responseData.data znajdują się dane
+		 *
+		 * Gdy przetwarzanie danych zakończone sukcesem w def.responseData.data znajdują się dane, def.responseData.mnm = 'ok'
+		 * a def.responseData.cod == 1.
+		 *
 		 * Gdy przetwarzanie danych nie powiodło się : nazwa błędu znadjuje się w def.responseData.mnm a kod błędu w def.responseData.cod
-		 * Kożystając z def.responseData.mnm można wywołać funkcję do jego obsługi.
-		 * Gdy nie jest zdefinowana wywołana zosrtanie funkcja domyślna
+		 * Kożystając z def.responseData.mnm można wywołać funkcję do jego obsługi. Gdy nie jest zdefinowana wywołana zostanie funkcja domyślna
 		 * @param {type} response
 		 * @returns {undefined}
 		 */
