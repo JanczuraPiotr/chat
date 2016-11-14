@@ -32,20 +32,12 @@ angular.module('app').factory('AjaxService',[
 			$location.path('/login');
 		};
 
-//		def.on.exChat = def.on.defaultFunction;
-//		def.on.exNewPassword = def.on.defaultFunction;
-//		def.on.exNewLogin = def.on.defaultFunction;
-//		def.on.exUserCreate = def.on.defaultFunction;
-//		def.on.exUserSelect = def.on.defaultFunction;
-//		def.on.exUserCreateExists = def.on.defaultFunction;
-//		def.on.exUserCreateNick = def.on.defaultFunction;
-//		def.on.exMessageCreate = def.on.defaultFunction;
-//		def.on.exMessageSelect = def.on.defaultFunction;
-//		def.on.exSessionTrouble = def.on.defaultFunction;
-
 		/**
 		 * Komunikacja zakończone kodem 200.
-		 * Poprawnie wykonanane zapytanie może
+		 * Gdy przetwarzanie danych zakończone sukcesem w def.responseData.data znajdują się dane
+		 * Gdy przetwarzanie danych nie powiodło się : nazwa błędu znadjuje się w def.responseData.mnm a kod błędu w def.responseData.cod
+		 * Kożystając z def.responseData.mnm można wywołać funkcję do jego obsługi.
+		 * Gdy nie jest zdefinowana wywołana zosrtanie funkcja domyślna
 		 * @param {type} response
 		 * @returns {undefined}
 		 */
@@ -54,6 +46,7 @@ angular.module('app').factory('AjaxService',[
 			if(def.responseData.mnm === 'ok'){
 				def.on.ok(def.responseData);
 			}else{
+				// żadanie zakończone z błędem kotórego
 				if(def.on[def.responseData.mnm]){
 					def.on[def.responseData.mnm](def.responseData);
 				}else{

@@ -80,20 +80,6 @@ angular.module('app').controller('ChatController',[
 					}
 				}
 			});
-
-//			$http.post(CF.url.api.CHAT,{
-//				action: 'readLast',
-//				timestamp : def.lastTimestamp
-//			}).then(function(response){
-//				var post;
-//				var posts = response.data.data;
-//				for ( post in posts){
-//					if( def.lastTimestamp < posts[post].timestamp ){
-//						def.lastTimestamp = posts[post].timestamp;
-//					}
-//					$scope.posts.add(posts[post]);
-//				}
-//			});
 		};
 		def.apiPostSend = function(){
 			$http.post(CF.url.api.CHAT,{
