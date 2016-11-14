@@ -9,7 +9,8 @@ angular.module('app').factory('AjaxService',[
 		var def = this;
 		def.responseData;
 
-		def.onDefaultFunction = function(response){console.log('AjaxService.donDefaultFunction(');
+		def.on = {};
+		def.on.defaultFunction = function(response){console.log('AjaxService.on.defaultFunction()');
 			console.log(response);
 			$mdDialog.show(
 				$mdDialog.alert()
@@ -19,44 +20,52 @@ angular.module('app').factory('AjaxService',[
 					.ok('Ok')
 			);
 		};
-		def.on = {};
-		def.on[CF.ex.cod.OK] = function(){console.log('AjaxService.on.OK');};
-		def.on[CF.ex.cod.CHAT] = def.onDefaultFunction;
-		def.on[CF.ex.cod.NOT_LOGGED] = def.onDefaultFunction;
-		def.on[CF.ex.cod.NEW_PASSWORD] = def.onDefaultFunction;
-		def.on[CF.ex.cod.LOGIN_PASSWORD] = def.onDefaultFunction;
-		def.on[CF.ex.cod.USER_CREATE] = def.onDefaultFunction;
-		def.on[CF.ex.cod.USER_SELECT] = def.onDefaultFunction;
-		def.on[CF.ex.cod.USER_CREATE_EXISTS] = def.onDefaultFunction;
-		def.on[CF.ex.cod.USER_CREATE_NICK] = def.onDefaultFunction;
-		def.on[CF.ex.cod.MESSAGE_CREATE] = def.onDefaultFunction;
-		def.on[CF.ex.cod.MESSAGE_SELECT] = def.onDefaultFunction;
-		def.on[CF.ex.cod.SESSION_TROUBLE] = def.onDefaultFunction;
-		def.on[CF.ex.cod.NOT_LOGGED] = def.onDefaultFunction;;
-
-		def.success = function(response){ console.log('AjaxService.success()');
-			def.responseData = response.data;
-
-			switch(def.responseData.ret){
-				case CF.ex.mnm[CF.ex.cod.OK]: def.on[CF.ex.cod.OK](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.CHAT]: def.on[CF.ex.cod.CHAT](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.NOT_LOGGED]: def.on[CF.ex.cod.NOT_LOGGED](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.NEW_PASSWORD]: def.on[CF.ex.cod.NEW_PASSWORD](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.LOGIN_PASSWORD]: def.on[CF.ex.cod.LOGIN_PASSWORD](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.USER_CREATE]: def.on[CF.ex.cod.USER_CREATE](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.USER_SELECT]: def.on[CF.ex.cod.USER_SELECT](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.USER_CREATE_EXISTS]: def.on[CF.ex.cod.USER_CREATE_EXISTS](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.USER_CREATE_NICK]: def.on[CF.ex.cod.USER_CREATE_NICK](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.MESSAGE_CREATE]: def.on[CF.ex.cod.MESSAGE_CREATE](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.MESSAGE_SELECT]: def.on[CF.ex.cod.MESSAGE_SELECT](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.SESSION_TROUBLE]: def.on[CF.ex.cod.SESSION_TROUBLE](def.responseData);	break;
-				case CF.ex.mnm[CF.ex.cod.NOT_LOGGED]: def.on[CF.ex.cod.NOT_LOGGED](def.responseData);	break;
-				default:
-					console.log('AjaxService.on.default');
-			}
-
+		def.on.ok = function(){console.log('AjaxService.on.ok()');};
+		def.on.exNotLogged = function(response){
+			$mdDialog.show(
+				$mdDialog.alert()
+					.clickOutsideToClose(true)
+					.title('Błąd')
+					.textContent(response.msg + (response.data.supplement ? ' : '+response.data.supplement : ''))
+					.ok('Ok')
+			);
+			$location.path('/login');
 		};
-		def.error = function(){};
+
+//		def.on.exChat = def.on.defaultFunction;
+//		def.on.exNewPassword = def.on.defaultFunction;
+//		def.on.exNewLogin = def.on.defaultFunction;
+//		def.on.exUserCreate = def.on.defaultFunction;
+//		def.on.exUserSelect = def.on.defaultFunction;
+//		def.on.exUserCreateExists = def.on.defaultFunction;
+//		def.on.exUserCreateNick = def.on.defaultFunction;
+//		def.on.exMessageCreate = def.on.defaultFunction;
+//		def.on.exMessageSelect = def.on.defaultFunction;
+//		def.on.exSessionTrouble = def.on.defaultFunction;
+
+		/**
+		 * Komunikacja zakończone kodem 200.
+		 * Poprawnie wykonanane zapytanie może
+		 * @param {type} response
+		 * @returns {undefined}
+		 */
+		def.requestSuccess = function(response){ console.log('AjaxService.success()');
+			def.responseData = response.data;
+			if(def.responseData.mnm === 'ok'){
+				def.on.ok(def.responseData);
+			}else{
+				if(def.on[def.responseData.mnm]){
+					def.on[def.responseData.mnm](def.responseData);
+				}else{
+					def.on.defaultFunction(def.responseData);
+				}
+			}
+		};
+		/**
+		 * Komunikacja zakończona kodem ~ 200
+		 * @returns {undefined}
+		 */
+		def.requestError = function(){};
 
 		def.pub = {
 			/**
@@ -72,10 +81,11 @@ angular.module('app').factory('AjaxService',[
 			 * @returns {promise}
 			 */
 			run : function(url, data, on, finallyFun){console.log('AjaxService.run()');
+				def.on = _.defaults(on,def.on);
 				if(finallyFun){
-					return $http.post(url, data).then(def.success, def.error);
+					return $http.post(url, data).then(def.requestSuccess, def.requestError);
 				}else{
-					return $http.post(url, data).then(def.success, def.error).finally(def.finnalyFunction);
+					return $http.post(url, data).then(def.requestSuccess, def.requestError).finally(def.finnalyFunction);
 				}
 			}
 		};

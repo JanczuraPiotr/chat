@@ -11,7 +11,7 @@ class UserSelect extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_USER_SELECT';
+		return 'exUserSelect';
 	}
 
 }

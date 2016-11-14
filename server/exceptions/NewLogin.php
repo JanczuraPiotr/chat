@@ -1,9 +1,9 @@
 <?php
 namespace server\exceptions;
 
-class LoginPassword extends \server\exceptions\ChatEx{
+class NewLogin extends \server\exceptions\ChatEx{
 	public function chatExCode() {
-		return static::LOGIN_PASSWORD;
+		return static::NEW_LOGIN;
 	}
 
 	public function chatExMsg() {
@@ -11,7 +11,7 @@ class LoginPassword extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_LOGIN_PASSWORD';
+		return 'exNewLogin';
 	}
 
 }

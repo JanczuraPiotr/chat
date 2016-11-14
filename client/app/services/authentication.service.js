@@ -5,35 +5,31 @@ angular.module('app').factory('AuthenticationService',[
 	'$location',
 	'$cookies',
 	'$mdDialog',
-	function($http, $location, $cookies, $mdDialog){console.log('AuthenticationService');
+	'AjaxService',
+	function($http, $location, $cookies, $mdDialog, AjaxService ){console.log('AuthenticationService');
 		var def = this;
 
 		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
-			switch(response.data.ret){
-				case CF.ex.mnm[CF.ex.cod.OK]:
-					$location.path('/chat');
-					break;
-				case CF.ex.mnm[CF.ex.cod.USER_SELECT]:
-							$mdDialog.show(
-								$mdDialog.alert()
-									.clickOutsideToClose(true)
-									.title(CF.ex.msg.USER_SELECT)
-									.textContent('Niepoprawne dane do logowania')
-									.ok('Ok')
-							);
-					break;
-			}
+			$location.path('/chat');
 		};
-		def.onLoginError = function(error){console.log('AuthenticationService.login.error');console.log(error);};
+		def.onLoginError = function(error){console.log('AuthenticationService.login.error');
+			$mdDialog.show(
+				$mdDialog.alert()
+					.clickOutsideToClose(true)
+					.title(CF.ret.msg.USER_SELECT)
+					.textContent('Niepoprawne dane do logowania')
+					.ok('Ok')
+			);
+		};
 		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');
 			console.log(response);
 
-			switch(response.data.ret){
-				case CF.ex.mnm[CF.ex.cod.NEW_PASSWORD]:
+			switch(response.data.cod){
+				case CF.ret.cod.NEW_PASSWORD:
 					$mdDialog.show(
 						$mdDialog.alert()
 							.clickOutsideToClose(true)
-							.title(CF.ex.msg[CF.ex.cod.NEW_PASSWORD])
+							.title(CF.ret.msg.NEW_PASSWORD)
 							.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
 							.ok('Ok')
 					);
@@ -56,18 +52,16 @@ angular.module('app').factory('AuthenticationService',[
 		};
 
 		def.pub = {
-			login : function(user, loginSuccess, loginError){console.log('AuthenticationService.login(user)');
+			login : function(user){console.log('AuthenticationService.login(user)');
 				var httpPromise;
-				if(typeof loginSuccess === 'function'){
-					def.onLoginSuccess = loginSuccess;
-				}
-				if(typeof loginError === 'function'){
-					def.onLoginError = loginError;
-				}
-				httpPromise = $http.post(CF.url.api.login, {
+
+				httpPromise = AjaxService.run(CF.url.api.login,{
 					action : 'login',
 					user : user
-				}).then(def.onLoginSuccess, def.onLoginError);
+				},{
+					ok: def.onLoginSuccess,
+					exUserSelect : def.onLoginError
+				});
 
 				return httpPromise;
 			},

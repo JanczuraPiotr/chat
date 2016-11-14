@@ -1,6 +1,11 @@
 <?php
 namespace server\service;
 
+use server\Stale;
+use server\exceptions\ChatEx;
+use server\logic\Post;
+use server\tabele\MessageAdmin;
+
 class Chat {
 	private static $instance;
 
@@ -16,21 +21,19 @@ class Chat {
 	public static function postAdd($post, $timestamp){
 		$json = '';
 		try{
-			\server\logic\Post::add($post);
-			$resp = \server\logic\Post::readFromTime($timestamp);
-//			foreach ($resp as $key => $value) {
-//				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
-//				$resp[$key]['post'] = htmlspecialchars($value['post']);
-//			}
+			Post::add($post);
+			$resp = Post::readFromTime($timestamp);
 			$json = json_encode([
-					'ret' => 'OK',
+					'cod' => Stale::OK,
+					'mnm' => 'ok',
 					'msg' => 'postReadLast',
 					'data' => $resp
 			]);
 
-		} catch ( \server\exceptions\ChatEx $ex){
+		} catch ( ChatEx $ex){
 			$json = json_encode([
-					'ret' => $ex->chatExName(),
+					'cod' => $ex->chatExCode(),
+					'mnm' => $ex->chatExName(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -38,7 +41,8 @@ class Chat {
 			]);
 		} catch (\Exception $ex) {
 			$json = json_encode([
-					'ret' => 'EXCEPTION',
+					'cod' => ChatEx::GENERAL,
+					'mnm' => 'exception',
 					'msg' => $ex->getMessage(),
 					'data' => [	]
 			]);
@@ -48,20 +52,22 @@ class Chat {
 	public static function postReadAll(){
 		$json = '';
 		try{
-			$resp = \server\logic\Post::readAll();
+			$resp = Post::readAll();
 			foreach ($resp as $key => $value) {
 				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
 				$resp[$key]['post'] = htmlspecialchars($value['post']);
 			}
 			$json = json_encode([
-					'ret' => 'OK',
+					'cod' => Stale::OK,
+					'mnm' => 'ok',
 					'msg' => 'postReadLast',
 					'data' => $resp
 			]);
 
-		} catch ( \server\exceptions\ChatEx $ex){
+		} catch ( ChatEx $ex){
 			$json = json_encode([
-					'ret' => $ex->chatExName(),
+					'cod' => $ex->chatExCode(),
+					'mnm' => $ex->chatExName(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -69,7 +75,8 @@ class Chat {
 			]);
 		} catch (\Exception $ex) {
 			$json = json_encode([
-					'ret' => 'EXCEPTION',
+					'cod' => ChatEx::GENERAL,
+					'mnm' => 'exception',
 					'msg' => $ex->getMessage(),
 					'data' => [	]
 			]);
@@ -79,20 +86,22 @@ class Chat {
 	public static function postReadLast($timestamp){
 		$json = '';
 		try{
-			$resp = \server\logic\Post::readFromTime($timestamp);
+			$resp = Post::readFromTime($timestamp);
 			foreach ($resp as $key => $value) {
 				$resp[$key]['nick'] = htmlspecialchars($value['nick']);
 				$resp[$key]['post'] = htmlspecialchars($value['post']);
 			}
 			$json = json_encode([
-					'ret' => 'OK',
+					'cod' => Stale::OK,
+					'mnm' => 'ok',
 					'msg' => 'postReadLast',
 					'data' => $resp
 			]);
 
-		} catch ( \server\exceptions\ChatEx $ex){
+		} catch (ChatEx $ex){
 			$json = json_encode([
-					'ret' => $ex->chatExName(),
+					'cod' => $ex->chatExCode(),
+					'mnm' => $ex->chatExName(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -100,7 +109,8 @@ class Chat {
 			]);
 		} catch (\Exception $ex) {
 			$json = json_encode([
-					'ret' => 'EXCEPTION',
+					'cod' => ChatEx::GENERAL,
+					'mnm' => 'exception',
 					'msg' => $ex->getMessage(),
 					'data' => [	]
 			]);
@@ -111,16 +121,18 @@ class Chat {
 		$json = '';
 
 		try{
-			\server\tabele\MessageAdmin::truncate(Service::getDB());
+			MessageAdmin::truncate(Service::getDB());
 			$json = json_encode([
-					'ret' => 'OK',
+					'cod' => Stale::OK,
+					'mnm' => 'ok',
 					'msg' => 'postReadLast',
 					'data' => []
 			]);
 
-		} catch ( \server\exceptions\ChatEx $ex){
+		} catch ( ChatEx $ex){
 			$json = json_encode([
-					'ret' => $ex->chatExName(),
+					'cod' => $ex->chatExCode(),
+					'mnm' => $ex->chatExName(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -128,7 +140,8 @@ class Chat {
 			]);
 		} catch (\Exception $ex) {
 			$json = json_encode([
-					'ret' => 'EXCEPTION',
+					'cod' => ChatEx::GENERAL,
+					'mnm' => 'exception',
 					'msg' => $ex->getMessage(),
 					'data' => [	]
 			]);

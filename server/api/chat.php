@@ -1,7 +1,8 @@
 <?php
+
 session_start();
 include '../loader.php';
-include '../Config.php';
+//include '../Config.php';
 
 
 try{
@@ -33,7 +34,7 @@ try{
 			break;
 
 		case 'readAll':
-			
+
 			$chat = \server\service\Service::getChat();
 			echo $chat->postReadAll();
 
@@ -61,7 +62,8 @@ try{
 	}
 } catch (\server\exceptions\NotLogged $ex){
 		echo json_encode([
-				'ret' => $ex->chatExName(),
+				'cod' => $ex->chatExCode(),
+				'mnm' => $ex->chatExName(),
 				'msg' => $ex->chatExMsg(),
 				'data' => []
 		]);

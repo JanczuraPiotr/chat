@@ -1,9 +1,13 @@
 <?php
 namespace server\logic;
+
+use server\tabele\UserSelect;
+use server\service\Service;
+
 // @todo dopracować logowanie obsługę sesji i cookies
 class Logowanie {
 	public static function login($nick, $password){
-		$user = \server\tabele\UserSelect::select($nick, $password, \server\service\Service::getDB());
+		$user = UserSelect::select($nick, $password, Service::getDB());
 		$expire = time() + 60*60*24*30;
 		setcookie('logged', $nick, $expire, '/');
 		$_SESSION['user_login'] = $user->getNick();

@@ -11,7 +11,7 @@ class NotLogged extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_NOT_LOGGED';
+		return 'exNotLogged';
 	}
 
 }

@@ -11,7 +11,7 @@ class NewPassword extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_NEW_PASSWORD';
+		return 'exNewPassword';
 	}
 
 }

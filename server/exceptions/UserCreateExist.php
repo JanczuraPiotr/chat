@@ -11,7 +11,7 @@ class UserCreateExist extends \server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_USER_CREATE_EXISTS';
+		return 'exUserCreateExists';
 	}
 
 }

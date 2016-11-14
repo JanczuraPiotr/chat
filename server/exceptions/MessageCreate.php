@@ -11,7 +11,7 @@ class MessageCreate extends server\exceptions\ChatEx{
 	}
 
 	public function chatExName() {
-		return 'EX_MESSAGE_CREATE';
+		return 'exMessageCreate';
 	}
 
 }

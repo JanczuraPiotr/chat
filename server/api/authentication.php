@@ -1,7 +1,13 @@
 <?php
+namespace server;
+use server\Stale;
+use server\logic\Rejestrator;
+use server\logic\Logowanie;
+use server\exceptions\ChatEx;
+
 session_start();
+
 include '../loader.php';
-include '../Config.php';
 
 // @todo dopracować logowanie obsługę sesji i cookies
 
@@ -13,18 +19,20 @@ switch($request->action){
 
 		try {
 
-			$user = server\logic\Logowanie::login($request->user->nick, $request->user->password);
+			$user = Logowanie::login($request->user->nick, $request->user->password);
 
 			echo json_encode([
-					'ret' => 'OK',
+					'cod' => Stale::OK,
+					'mnm' => 'ok',
 					'msg' => 'zalogowano',
 					'data' => [
 							'nick' => htmlspecialchars($user->getNick())
 					]
 			]);
-		} catch ( \server\exceptions\ChatEx $ex){
+		} catch ( ChatEx $ex){
 			echo json_encode([
-					'ret' => $ex->chatExName(),
+					'cod' => $ex->getCode(),
+					'mnm' => $ex->chatExName(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -32,7 +40,8 @@ switch($request->action){
 			]);
 		} catch (\Exception $ex) {
 				echo json_encode([
-						'ret' => 'EXCEPTION',
+						'cod' => ChatEx::GENERAL,
+						'mnm' => 'exception',
 						'msg' => $ex->getMessage(),
 						'data' => [	]
 				]);
@@ -58,17 +67,19 @@ switch($request->action){
 		}
 
 		try{
-			\server\logic\Rejestrator::rejestruj($nick, $pass1, $pass2);
+			Rejestrator::rejestruj($nick, $pass1, $pass2);
 			echo json_encode([
-					'ret' => 'OK',
+					'mnm' => 'ok',
+					'ret' => Stale::OK,
 					'msg' => 'zarejestrowano',
 					'data' => [
 						'nick' => htmlspecialchars($nick),
 					]
 			]);
-		} catch (\server\exceptions\ChatEx $ex) {
+		} catch (ChatEx $ex) {
 			echo json_encode([
-					'ret' => $ex->chatExName(),
+					'mnm' => $ex->chatExName(),
+					'cod' => $ex->chatExCode(),
 					'msg' => $ex->chatExMsg(),
 					'data' => [
 							'supplement' => $ex->getMessage()
@@ -76,7 +87,8 @@ switch($request->action){
 			]);
 		}  catch (\Exception $e){
 			echo json_encode([
-					'ret' => 'EXCEPTION',
+					'cod' => ChatEx::GENERAL,
+					'mnm' => 'exception',
 					'msg' => $e->getMessage()
 			]);
 		}

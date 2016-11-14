@@ -40,8 +40,8 @@ angular.module('app').controller('ChatController',[
 			}).then(function(response){
 				var post;
 				var posts = response.data.data;
-				switch(response.data.ret){
-					case CF.ex.mnm.OK:
+				switch(response.data.mnm){
+					case 'ok':
 						for ( post in posts){
 							$scope.posts.add(posts[post]);
 							if( def.lastTimestamp < posts[post].timestamp ){
@@ -49,11 +49,11 @@ angular.module('app').controller('ChatController',[
 							}
 						}
 						break;
-					case CF.ex.mnm.NOT_LOGGED:
+					case 'exNotLogged':
 							$mdDialog.show(
 								$mdDialog.alert()
 									.clickOutsideToClose(true)
-									.title(CF.ex.msg.NOT_LOGGED)
+									.title(CF.ret.msg.NOT_LOGGED)
 									.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
 									.ok('Ok')
 							);
@@ -65,21 +65,35 @@ angular.module('app').controller('ChatController',[
 			});
 		};
 		def.apiReadLast = function(){
-			$http.post(CF.url.api.CHAT,{
+			AjaxService.run(CF.url.api.CHAT,{
 				action: 'readLast',
 				timestamp : def.lastTimestamp
-			}).then(function(response){
-				var post;
-				var posts = response.data.data;
-				for ( post in posts){
-					if( def.lastTimestamp < posts[post].timestamp ){
-						def.lastTimestamp = posts[post].timestamp;
+			},{
+				ok : function(response){
+					var post;
+					var posts = response.data.data;
+					for ( post in posts){
+						if( def.lastTimestamp < posts[post].timestamp ){
+							def.lastTimestamp = posts[post].timestamp;
+						}
+						$scope.posts.add(posts[post]);
 					}
-					$scope.posts.add(posts[post]);
 				}
-			},function(error){console.log('ChatController.readLast().error');
-
 			});
+
+//			$http.post(CF.url.api.CHAT,{
+//				action: 'readLast',
+//				timestamp : def.lastTimestamp
+//			}).then(function(response){
+//				var post;
+//				var posts = response.data.data;
+//				for ( post in posts){
+//					if( def.lastTimestamp < posts[post].timestamp ){
+//						def.lastTimestamp = posts[post].timestamp;
+//					}
+//					$scope.posts.add(posts[post]);
+//				}
+//			});
 		};
 		def.apiPostSend = function(){
 			$http.post(CF.url.api.CHAT,{
@@ -89,8 +103,8 @@ angular.module('app').controller('ChatController',[
 			}).then(function(response){
 				var post;
 				var posts = response.data.data;
-				switch (response.data.ret){
-					case 'OK':
+				switch (response.data.mnm){
+					case 'ok':
 						for ( post in posts){
 							$scope.posts.add(posts[post]);
 							if( def.lastTimestamp < posts[post].timestamp ){
@@ -115,8 +129,8 @@ angular.module('app').controller('ChatController',[
 			$http.post(CF.url.api.CHAT,{
 				action : command
 			}).then(function(response){
-				switch(response.data.ret){
-					case 'OK':
+				switch(response.data.mnm){
+					case 'ok':
 						$scope.posts.clear();
 						$scope.posts.add($scope.newPost);
 						$scope.newPost = '';
