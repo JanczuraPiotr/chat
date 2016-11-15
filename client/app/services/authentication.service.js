@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('app').factory('AuthenticationService',[
-	'$http',
 	'$location',
 	'$cookies',
 	'$mdDialog',
 	'AjaxService',
-	function($http, $location, $cookies, $mdDialog, AjaxService ){console.log('AuthenticationService');
+	function($location, $cookies, $mdDialog, AjaxService ){console.log('AuthenticationService');
 		var def = this;
 
 		def.onLoginSuccess = function(response){console.log('AuthenticationService.login.success');
@@ -22,22 +21,16 @@ angular.module('app').factory('AuthenticationService',[
 			);
 		};
 		def.onRegistrationSuccess = function(response){console.log('AuthenticationService.registration.success');
-			console.log(response);
 
-			switch(response.data.cod){
-				case CF.ret.cod.NEW_PASSWORD:
-					$mdDialog.show(
-						$mdDialog.alert()
-							.clickOutsideToClose(true)
-							.title(CF.ret.msg.NEW_PASSWORD)
-							.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
-							.ok('Ok')
-					);
-					break;
-				default:
-					$location.path('/login');
-			}
-
+			$mdDialog.show(
+				$mdDialog.alert()
+					.clickOutsideToClose(true)
+					.title(CF.ret.msg.NEW_PASSWORD)
+					.textContent(response.msg + (response.data.supplement ? ' : '+response.data.supplement : ''))
+					.ok('Ok')
+			);
+			// @todo po poprawnym zarejestrowaniu okno logowania zawiera wcześniej zapamiętane dane. Przerobić by okno logowania zawierało właśnie utworzone legin i hasło
+			$location.path('/login');
 		};
 		def.onRegistrationError = function(error){console.log('AuthenticationService.registration.error');
 			console.log(error);
@@ -53,9 +46,9 @@ angular.module('app').factory('AuthenticationService',[
 
 		def.pub = {
 			login : function(user){console.log('AuthenticationService.login(user)');
-				var httpPromise;
+				var ajaxPromise;
 
-				httpPromise = AjaxService.run(CF.url.api.login,{
+				ajaxPromise = AjaxService.run(CF.url.api.login,{
 					action : 'login',
 					user : user
 				},{
@@ -63,9 +56,10 @@ angular.module('app').factory('AuthenticationService',[
 					exUserSelect : def.onLoginError
 				});
 
-				return httpPromise;
+				return ajaxPromise;
 			},
 			logout : function(onLogoutSuccess, onLogoutError){console.log('AuthenticationService.logout()');
+
 				$cookies.remove($cookies);
 
 				if(typeof onLogoutSuccess === 'function'){
@@ -75,20 +69,34 @@ angular.module('app').factory('AuthenticationService',[
 					def.onLogoutError = onLogoutError;
 				}
 
-				$http.post(CF.url.api.login, {action : 'logout'}).then(def.onLogoutSuccess, def.onLogoutError);
+				return AjaxService.run(CF.url.api.login,{
+					action: 'logout'
+				},{
+					ok: def.onLogoutSuccess,
+					default: def.onLogoutError
+				});
 			},
 			registration : function(registrationData, onRegistrationSuccess, onRegistrationError){
+				var ajaxPromise;
+
 				if(typeof onRegistrationSuccess === 'function'){
 					def.onRegistrationSuccess = onRegistrationSuccess;
 				}
 				if(typeof onRegistrationError === 'function'){
 					def.onRegistrationError = onRegistrationError;
 				}
-				$http.post(CF.url.api.registration,{
+
+				ajaxPromise = AjaxService.run(CF.url.api.registration,{
 					action : 'rejestracja',
 					data : registrationData
-				}).then(def.onRegistrationSuccess, def.onRegistrationError);
-
+				},{
+					ok: def.onRegistrationSuccess,
+					// Wszystkie problemy z rejestracją zostaną obsłużone przez metoę default z AjaxService
+					//exUserCreateExists : function(response){console.log('AuthenticationService.registration().exUserCreateExists()');
+					//	console.log(response);
+					//},
+				});
+				return ajaxPromise;
 			}
 		};
 

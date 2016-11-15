@@ -13,7 +13,7 @@ angular.module('app').factory('AjaxService',[
 			$mdDialog.show(
 				$mdDialog.alert()
 					.clickOutsideToClose(true)
-					.title('Błąd podczas komunikacji z serverem')
+					.title('Błąd')
 					.textContent(response.msg + (response.data.supplement ? ' : '+response.data.supplement : ''))
 					.ok('Ok')
 			);

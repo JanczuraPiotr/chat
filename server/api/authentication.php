@@ -1,5 +1,6 @@
 <?php
 namespace server;
+
 use server\Stale;
 use server\logic\Rejestrator;
 use server\logic\Logowanie;
@@ -98,7 +99,13 @@ switch($request->action){
 
 	case 'logout':
 		session_destroy();
-		echo json_encode([]);
+			echo json_encode([
+					'mnm' => 'ok',
+					'ret' => Stale::OK,
+					'msg' => 'logout',
+					'data' => [
+					]
+			]);
 		break;
 
 	default:
