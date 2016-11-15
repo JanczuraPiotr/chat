@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include '../loader.php';
 include '../Config.php';
 

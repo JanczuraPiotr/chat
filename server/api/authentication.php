@@ -9,6 +9,8 @@ use server\exceptions\ChatEx;
 session_start();
 
 include '../loader.php';
+include '../Config.php';
+
 
 // @todo dopracować logowanie obsługę sesji i cookies
 
