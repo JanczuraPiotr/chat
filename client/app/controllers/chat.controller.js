@@ -2,14 +2,12 @@
 // @todo Przewijanie okna wiadomości do ostatniego wiersza - podczas ładowania i zmiany rozmiaru
 angular.module('app').controller('ChatController',[
 	'$scope',
-	'$http',
-	'$location',
 	'$interval',
 	'$mdDialog',
 	'AjaxService',
 	'AuthenticationService',
 
-	function($scope, $http, $location, $interval, $mdDialog, AjaxService, AuthenticationService){ console.log('ChatController');
+	function($scope, $interval, $mdDialog, AjaxService, AuthenticationService){ console.log('ChatController');
 		var def = this;
 		def.run = null;
 		def.lastTimestamp = '';
@@ -30,38 +28,20 @@ angular.module('app').controller('ChatController',[
 			$interval.cancel(def.run);
 		});
 
-		AjaxService.run(CF.url.api.CHAT,{
-				action: 'readAll'
-			},{},function(){console.log('AjaxService.finally');});
-
-		def.apiReadAll = function(){
-			$http.post(CF.url.api.CHAT,{
-				action: 'readAll'
-			}).then(function(response){
-				var post;
-				var posts = response.data.data;
-				switch(response.data.mnm){
-					case 'ok':
-						for ( post in posts){
-							$scope.posts.add(posts[post]);
-							if( def.lastTimestamp < posts[post].timestamp ){
-								def.lastTimestamp = posts[post].timestamp;
+		def.apiReadAll = function(){console.log('ChatController.apiReadAll()');
+			AjaxService.run(CF.url.api.CHAT,{
+				action : 'readAll'
+			},{
+				ok:	function(response){console.log('ChatController.apiReadAll().ok()');
+							var post;
+							var posts = response.data;
+							for ( post in posts){
+								$scope.posts.add(posts[post]);
+								if( def.lastTimestamp < posts[post].timestamp ){
+									def.lastTimestamp = posts[post].timestamp;
+								}
 							}
 						}
-						break;
-					case 'exNotLogged':
-							$mdDialog.show(
-								$mdDialog.alert()
-									.clickOutsideToClose(true)
-									.title(CF.ret.msg.NOT_LOGGED)
-									.textContent(response.data.msg + (response.data.data.supplement ? ' : '+response.data.data.supplement : ''))
-									.ok('Ok')
-							);
-							$location.path('/login');
-						break;
-				}
-			},function(error){console.log('ChatController.apiReadAll().error');
-
 			});
 		};
 		def.apiReadLast = function(){
@@ -69,66 +49,48 @@ angular.module('app').controller('ChatController',[
 				action: 'readLast',
 				timestamp : def.lastTimestamp
 			},{
-				ok : function(response){
-					var post;
-					var posts = response.data;
-					for ( post in posts){
-						if( def.lastTimestamp < posts[post].timestamp ){
-							def.lastTimestamp = posts[post].timestamp;
+				ok:	function(response){
+							var post;
+							var posts = response.data;
+							for ( post in posts){
+								if( def.lastTimestamp < posts[post].timestamp ){
+									def.lastTimestamp = posts[post].timestamp;
+								}
+								$scope.posts.add(posts[post]);
+							}
 						}
-						$scope.posts.add(posts[post]);
-					}
-				}
 			});
 		};
 		def.apiPostSend = function(){
-			$http.post(CF.url.api.CHAT,{
+			AjaxService.run(CF.url.api.CHAT,{
 				action : 'add',
 				post : $scope.newPost,
 				timestamp : def.lastTimestamp,
-			}).then(function(response){
-				var post;
-				var posts = response.data.data;
-				switch (response.data.mnm){
-					case 'ok':
-						for ( post in posts){
-							$scope.posts.add(posts[post]);
-							if( def.lastTimestamp < posts[post].timestamp ){
-								def.lastTimestamp = posts[post].timestamp;
-							}
-						}
-						$scope.posts.add($scope.newPost);
-						$scope.newPost = '';
-						break;
-					default:
-						if(response.data.supplement){
-							alert(response.msg + '\n objaśnienie : \n' + response.data.supplement);
-						}else{
-							alert(response.msg);
-						}
-				}
-			},function(error){console.log('ChatController.apiSend().error()');
+			},{
+				ok:	function(response){
+							var post;
+							var posts = response.data;
 
+							for ( post in posts){
+								$scope.posts.add(posts[post]);
+								if( def.lastTimestamp < posts[post].timestamp ){
+									def.lastTimestamp = posts[post].timestamp;
+								}
+							}
+							$scope.posts.add($scope.newPost);
+							$scope.newPost = '';
+						}
 			});
 		};
 		def.apiCommand = function(command){
-			$http.post(CF.url.api.CHAT,{
+			AjaxService.run(CF.url.api.CHAT,{
 				action : command
-			}).then(function(response){
-				switch(response.data.mnm){
-					case 'ok':
-						$scope.posts.clear();
-						$scope.posts.add($scope.newPost);
-						$scope.newPost = '';
-						break;
-					default:
-						if(response.data.supplement){
-							alert(response.msg + '\n objaśnienie : \n' + response.data.supplement);
-						}else{
-							alert(response.msg);
+			},{
+				ok:	function(response){
+							$scope.posts.clear();
+							$scope.posts.add($scope.newPost);
+							$scope.newPost = '';
 						}
-				}
-			},function(error){
 			});
 		};
 

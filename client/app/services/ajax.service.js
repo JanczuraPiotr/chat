@@ -3,15 +3,13 @@
 angular.module('app').factory('AjaxService',[
 	'$http',
 	'$location',
-	'$cookies',
 	'$mdDialog',
-	function($http, $location, $cookies, $mdDialog){console.log('AjaxService');
+	function($http, $location, $mdDialog){console.log('AjaxService');
 		var def = this;
 		def.responseData;
 
 		def.on = {};
-		def.on.defaultFunction = function(response){console.log('AjaxService.on.defaultFunction()');
-			console.log(response);
+		def.on.default = function(response){console.log('AjaxService.on.default()');
 			$mdDialog.show(
 				$mdDialog.alert()
 					.clickOutsideToClose(true)
@@ -26,14 +24,14 @@ angular.module('app').factory('AjaxService',[
 				$mdDialog.alert()
 					.clickOutsideToClose(true)
 					.title('Błąd')
-					.textContent(response.msg + (response.data.supplement ? ' : '+response.data.supplement : ''))
+					.textContent(response.msg + (response.data.supplement ? '\n objaśnienie : \n'+response.data.supplement : ''))
 					.ok('Ok')
 			);
 			$location.path('/login');
 		};
 
 		/**
-		 * Komunikacja zakończone kodem 200.
+		 * Komunikacja zakończona kodem 200.
 		 *
 		 * Gdy przetwarzanie danych zakończone sukcesem w def.responseData.data znajdują się dane, def.responseData.mnm = 'ok'
 		 * a def.responseData.cod == 1.
@@ -48,11 +46,10 @@ angular.module('app').factory('AjaxService',[
 			if(def.responseData.mnm === 'ok'){
 				def.on.ok(def.responseData);
 			}else{
-				// żadanie zakończone z błędem kotórego
 				if(def.on[def.responseData.mnm]){
 					def.on[def.responseData.mnm](def.responseData);
 				}else{
-					def.on.defaultFunction(def.responseData);
+					def.on.default(def.responseData);
 				}
 			}
 		};
@@ -60,16 +57,18 @@ angular.module('app').factory('AjaxService',[
 		 * Komunikacja zakończona kodem ~ 200
 		 * @returns {undefined}
 		 */
-		def.requestError = function(){};
+		def.requestError = function(){
+			// @todo Komunikacja wykorzystująca kody html do obsługi błędów
+		};
 
 		def.pub = {
 			/**
 			 *
 			 * @param {string} url
 			 * @param {json} data
-			 * @param {json} on lista funkcji podmieniajcych domuślne funkcje
+			 * @param {json} on lista funkcji podmieniajcych domyślne funkcje
 			 *									{
-			 *										cod : function,
+			 *										mnmemonic : function,
 			 *										....
 			 *									}
 			 * @param {function} finallyFunction funkcja do wykonania na finał komunikacji. AjaxService nie posiada własnej funkcji finalnej
