@@ -43,8 +43,6 @@
 			</div>
 		</header>
 
-		</div>
-
 		<div ng-view>
 
 		</div>

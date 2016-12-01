@@ -19,7 +19,7 @@ var CF = {
 	MIN_PASS_LENGTH : 4
 };
 
-CF.ret = {		// Wyjątki zgłaszane przez server
+CF.ret = {	// Stałe zwracane przez server
 	cod : {},	// Liczbowy kod wyjątku
 	msg : {}	// Wiadomość opisowa wyjątku
 };
